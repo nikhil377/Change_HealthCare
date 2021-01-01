@@ -1,0 +1,74 @@
+.aside-filter-box{
+    background-color:#D3D3D3;
+    width:30%;
+}
+.search-text{
+    font-size: 32px;
+    margin-left: 10px;
+}
+.dark-grey-button{
+    width: 150px;
+    height: 40px;
+    color: white;
+    background-color: black;
+    margin-left: 10px;
+}
+.light-grey-button{
+    width: 150px;
+    height: 40px;
+    color:white;
+    background-color: grey;
+}
+.select-category-text{
+    margin-left: 40px;
+}
+.multiselect {
+    width: 200px;
+  }
+  
+  .selectBox {
+    position: relative;
+  }
+  
+  .selectBox select {
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  .overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  #checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+  }
+  
+  #checkboxes label {
+    display: block;
+  }
+  
+  #checkboxes label:hover {
+    background-color: #1e90ff;
+  }
+  .issuer-label{
+    margin-top:10px;
+    margin-left:35px;
+  }
+  .search-button{
+    width: 150px;
+    height: 40px;
+    color: gray;
+    background-color: #a5e5ff;
+    margin-left: 10px;
+  }
+  .clear-all-button{
+    width: 150px;
+    height: 40px;
+    color:black;
+    background-color: gainsboro;
+  }
