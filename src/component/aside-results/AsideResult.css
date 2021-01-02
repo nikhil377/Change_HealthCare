@@ -1,4 +1,18 @@
+h2{
+    margin-left: 20px;
+}
 .record-numbers{
-    font-size: 16px;
+    font-size: 20px;
     font-weight: normal;
+    text-align: center;
+    justify-content: center;
+}
+.no-records-text{
+    margin-left: 22px;
+    color: gray;
+}
+.filter-container{
+    border-bottom: 1px solid rgb(224, 223, 223);
+    margin-left: 8px;
+    margin-right: 8px;
 }

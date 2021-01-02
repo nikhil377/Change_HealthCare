@@ -1,6 +1,7 @@
 .aside-filter-box{
     background-color:#D3D3D3;
     width:30%;
+    padding-left: 10px;
 }
 .search-text{
     font-size: 32px;
@@ -11,7 +12,7 @@
     height: 40px;
     color: white;
     background-color: black;
-    margin-left: 10px;
+  
 }
 .light-grey-button{
     width: 150px;
@@ -19,8 +20,10 @@
     color:white;
     background-color: grey;
 }
+
 .select-category-text{
     margin-left: 40px;
+    margin-top: 10px;
 }
 .multiselect {
     width: 200px;
@@ -71,4 +74,7 @@
     height: 40px;
     color:black;
     background-color: gainsboro;
+  }
+  label{
+    margin-left: 5px;
   }

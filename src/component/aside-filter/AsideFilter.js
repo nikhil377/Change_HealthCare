@@ -20,21 +20,13 @@ export default class AsideFilter extends Component {
             value:e.target.value
         });
     }
-    changeComponentView=(e)=>{
-        console.log(e.target.value);
-        this.setState({
-            component:e.target.value
-        });
-    }
     render(){
-        const {value,component}=this.state;
+        const {value}=this.state;
+        console.log("this props", this.props);
         return (
-            <div className="aside-filter-box">
-                <div className="search-text">Search</div>
-                <button className="dark-grey-button" value="patient" onClick={this.changeComponentView}>PATIENT</button>
-                <button className="light-grey-button" value="study" onClick={this.changeComponentView}>STUDY</button>
-                <p className="select-category-text">Select one of the category below:</p>
-            {component==="patient" ? 
+        <div>              
+            <p className="select-category-text">Select one of the category below:</p>
+            {this.props.activeComponent==="patient" ? 
             <div>
                 <input 
                         type="radio" 
