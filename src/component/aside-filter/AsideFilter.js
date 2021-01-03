@@ -10,21 +10,59 @@ export default class AsideFilter extends Component {
         super(props);
         this.state={
            value:"Patient Name",
-           component:"patient"
+           component:"patient",
+           filteredData:[{
+                firstName:"",
+                lastname:"",
+                patientId:"",
+                Issuer:"Change Health-care",
+                status: "On track",
+                dateOfBirth:"12 Nov, 1997",
+                gender:"Male"
+           }]
         }  
     
     }
     enableFields=(e)=>{
-        console.log(e.target.value);
         this.setState({
             value:e.target.value
         });
     }
+    submitData=()=>{
+        this.props.data(this.state.filteredData)
+    }
+    getInputFilteredData(value){
+        if(value.includes("First Name")){
+            value=value.split("First Name");
+            const filteredData = this.state.filteredData.slice();
+            filteredData[0].firstName = value[1];
+            return()=>{
+                this.setState({ filteredData });
+        }
+        }
+        if(value.includes("Last Name")){
+            value=value.split("Last Name");
+            const filteredData = this.state.filteredData.slice();
+            filteredData[0].lastname = value[1];
+            return()=>{
+                this.setState({ filteredData });
+        }
+        }
+        if(value.includes("Patient Id")){
+            value=value.split("Patient Id");
+            const filteredData = this.state.filteredData.slice();
+                filteredData[0].patientId = value[1];
+            return()=>{
+                this.setState({ filteredData });
+        }
+        }
+    }
     render(){
-        const {value}=this.state;
-        console.log("this props", this.props);
+        const {value,filteredData}=this.state;
+        console.log("this filtered", filteredData);
         return (
-        <div>              
+        <div>  
+            <form onSubmit={this.submitData()}>        
             <p className="select-category-text">Select one of the category below:</p>
             {this.props.activeComponent==="patient" ? 
             <div>
@@ -37,8 +75,8 @@ export default class AsideFilter extends Component {
                         onChange={this.enableFields}/>
         
                 <label for="patient-name">Patient Name</label>
-                <InputBox name="Last Name" isMandatory="true" disabled={value!=="Patient Name"}/>
-                <InputBox name="First Name" disabled={value!=="Patient Name"}/>
+                <InputBox name="Last Name" isMandatory="true" disabled={value!=="Patient Name"} data={this.getInputFilteredData.bind(this)}/>
+                <InputBox name="First Name" disabled={value!=="Patient Name"} data={this.getInputFilteredData.bind(this)}/>
                 <hr/>
     
                 <input 
@@ -50,7 +88,7 @@ export default class AsideFilter extends Component {
                     onChange={this.enableFields} />
         
                 <label for="patient-id">Patient ID & Issuer</label>
-                <InputBox name="Patient Id" isMandatory="true"  disabled={value!=="Patient ID & Issuer"} />
+                <InputBox name="Patient Id" isMandatory="true"  disabled={value!=="Patient ID & Issuer"} data={this.getInputFilteredData.bind(this)}/>
                 <label className="issuer-label" for="issuer">Issuer</label>
                 <MultiSelectAll />
                 <hr/>
@@ -64,13 +102,13 @@ export default class AsideFilter extends Component {
                     onChange={this.enableFields}/>
 
                 <label for="internal-id">Internal ID</label>
-                <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}/>
+                <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}  data={this.getInputFilteredData.bind(this)}/>
                 </div>
                 :   <StudyComponent/>
                 }
-                <button type="submit"className="search-button">SEARCH</button>
+                <button type="submit" className="search-button" disabled>SEARCH</button>
                 <button className="clear-all-button">CLEAR ALL</button>
-            
+                </form>    
             </div>
       
         )

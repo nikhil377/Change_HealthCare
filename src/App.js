@@ -8,14 +8,23 @@ import { Component } from 'react';
   constructor(props){
     super(props);
     this.state={
-       active:"patient"
+       active:"patient",
+       dataToDisplay: ""
     }  
 }
 changeComponentView=(e)=>{
   console.log(e.target.value);
   this.setState({
       active:e.target.value
-  },console.log("active value",this.state.active));
+  });
+}
+updateData(value){
+  console.log("value",value)
+  return()=>{
+    this.setState({
+      dataToDisplay:value
+    });
+  }
 }
    render(){
     const {active}=this.state;
@@ -27,9 +36,8 @@ changeComponentView=(e)=>{
           <div className="search-text">Search</div>
               <button className={active==="patient"? "dark-grey-button": "light-grey-button"} value="patient" onClick={this.changeComponentView}>PATIENT</button>
               <button className={active==="study"? "dark-grey-button": "light-grey-button"} value="study" onClick={this.changeComponentView}>STUDY</button>
-            <AsideFilter activeComponent={active}/>
+            <AsideFilter activeComponent={active} data={this.updateData.bind(this)}/>
           </div>
-            <AsideResult/>
             <AsideResult activeComponent={active} />
           </div>
       </div>

@@ -1,13 +1,35 @@
+import React,{ Component } from 'react';
 import './InputBox.css'
-export default function InputBox(props) {
-    return (
-        <div className="input-box">
-            <label className="input-label" for="fname">{props.name}</label>
-            {props.isMandatory? <span>&#42;</span> :null}
-            <br/>
-            {props.type==="date"?  <input type="date"  id={props.name} name={props.name} disabled={props.disabled}/>:
-            <input type="text" id={props.name} name={props.name} disabled={props.disabled}/>}<br/>
-        </div>
-       
-    )
+export default class InputBox extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            inputBoxValue:""
+        }  
+    }
+    getChangedValue=(e)=>{
+        this.setState({
+            inputBoxValue:e.target.value
+        },()=>{
+            this.props.data(this.props.name+this.state.inputBoxValue)
+            console.log("change", this.state.inputBoxValue);
+        })
+    }
+    render(){
+        const {inputBoxValue}=this.state;
+        return (
+            <div className="input-box">
+                <label className="input-label" for={this.props.name}>{this.props.name}</label>
+                {this.props.isMandatory? <span>&#42;</span> :null}
+                <br/>
+                {this.props.type==="date"?  
+                
+                <input type="date"  id={this.props.name} name={this.props.name} disabled={this.props.disabled}/>
+                :
+                <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>}<br/>
+            </div>
+           
+        )
+    }
+   
 }
