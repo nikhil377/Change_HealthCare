@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import React from 'react';
-import  './aside.css'
+import  './PatientComponent.css'
 import InputBox from './InputBox';
 import MultiSelectAll from './MultiSelectAll.js'
 
-export default class AsideFilter extends Component {
+export default class PatientComponent extends Component {
     constructor(props){
         super(props);
         this.initialState={

@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './component/header/Header'
-import AsideFilter from './component/aside-filter/AsideFilter';
+import PatientComponent from './component/aside-filter/PatientComponent';
 import AsideResult from './component/aside-results/AsideResult';
 import { Component } from 'react';
 import StudyComponent from './component/aside-filter/StudyComponent';
@@ -37,8 +37,10 @@ class App extends Component {
             <div className="search-text">Search</div>
             <button className={active === "patient" ? "dark-grey-button" : "light-grey-button"} value="patient" onClick={this.changeComponentView}>PATIENT</button>
             <button className={active === "study" ? "dark-grey-button" : "light-grey-button"} value="study" onClick={this.changeComponentView}>STUDY</button>
-            {active === "patient" ? <AsideFilter  data={this.updateData.bind(this)} />
-              : <StudyComponent data={this.updateData.bind(this)} />}
+            {active === "patient" ? 
+              <PatientComponent  data={this.updateData.bind(this)} />
+              : <StudyComponent data={this.updateData.bind(this)} />
+            }
           </div>
           <AsideResult activeComponent={active} />
         </div>
