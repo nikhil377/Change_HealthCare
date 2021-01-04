@@ -8,19 +8,21 @@ import StudyComponent from './StudyComponent';
 export default class AsideFilter extends Component {
     constructor(props){
         super(props);
-        this.state={
+        this.initialState={
            value:"Patient Name",
            component:"patient",
            filteredData:[{
                 firstName:"",
                 lastname:"",
                 patientId:"",
+                internalId:"",
                 Issuer:"Change Health-care",
                 status: "On track",
                 dateOfBirth:"12 Nov, 1997",
                 gender:"Male"
            }]
-        }  
+        } 
+        this.state=JSON.parse(JSON.stringify(this.initialState))
     
     }
     enableFields=(e)=>{
@@ -56,10 +58,27 @@ export default class AsideFilter extends Component {
                 this.setState({ filteredData });
         }
         }
+        if(value.includes("Internal Id")){
+            value=value.split("Internal Id");
+            const filteredData = this.state.filteredData.slice();
+                filteredData[0].internalId = value[1];
+            return()=>{
+                this.setState({ filteredData });
+        }
+        }
     }
+    // resetFields=(e)=>{
+    //     e.preventDefault();
+    //     const initialData= this.initialState.filteredData;
+    //     console.log("inital state", this.initialState.filteredData);
+    //     this.setState({
+    //         initialData
+    //     })
+    // }
     render(){
         const {value,filteredData}=this.state;
-        console.log("this filtered", filteredData);
+         const disabledSumbit= filteredData[0].firstName.length<=0 && filteredData[0].patientId.length<=0 && filteredData[0].internalId.length<=0
+
         return (
         <div>  
             <form onSubmit={this.submitData()}>        
@@ -103,11 +122,11 @@ export default class AsideFilter extends Component {
 
                 <label for="internal-id">Internal ID</label>
                 <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}  data={this.getInputFilteredData.bind(this)}/>
+                <button type="submit" className="search-button" disabled={disabledSumbit}>SEARCH</button>
+                <button className="clear-all-button">CLEAR ALL</button>
                 </div>
                 :   <StudyComponent/>
                 }
-                <button type="submit" className="search-button" disabled>SEARCH</button>
-                <button className="clear-all-button">CLEAR ALL</button>
                 </form>    
             </div>
       
