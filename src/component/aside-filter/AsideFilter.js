@@ -3,7 +3,6 @@ import React from 'react';
 import  './aside.css'
 import InputBox from './InputBox';
 import MultiSelectAll from './MultiSelectAll.js'
-import StudyComponent from './StudyComponent';
 
 export default class AsideFilter extends Component {
     constructor(props){
@@ -82,7 +81,6 @@ export default class AsideFilter extends Component {
         <div>  
             <form onSubmit={this.submitData()}>        
             <p className="select-category-text">Select one of the category below:</p>
-            {this.props.activeComponent==="patient" ? 
             <div>
                 <input 
                         type="radio" 
@@ -124,8 +122,6 @@ export default class AsideFilter extends Component {
                 <button type="submit" className="disabled-search-button" disabled={disabledSumbit}>SEARCH</button>
                 <button className="clear-all-button">CLEAR ALL</button>
                 </div>
-                :   <StudyComponent/>
-                }
                 </form>    
             </div>
       
