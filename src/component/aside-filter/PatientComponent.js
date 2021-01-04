@@ -76,11 +76,11 @@ export default class PatientComponent extends Component {
     // }
     render(){
          const {value,filteredData}=this.state;
+         console.log("updated state in patient ", filteredData);
          const disabledSumbit= filteredData[0].firstName.length<=0 && filteredData[0].patientId.length<=0 && filteredData[0].internalId.length<=0
         return (
         <div>  
-            <form onSubmit={this.submitData()}>        
-            <p className="select-category-text">Select one of the category below:</p>
+            <form onSubmit={this.submitData()}>
             <div>
                 <input 
                         type="radio" 

@@ -12,7 +12,6 @@ export default class InputBox extends Component {
             inputBoxValue:e.target.value
         },()=>{
             this.props.data(this.props.name+this.state.inputBoxValue)
-            console.log("change", this.state.inputBoxValue);
         })
     }
     render(){
@@ -24,7 +23,7 @@ export default class InputBox extends Component {
                 <br/>
                 {this.props.type==="date"?  
                 
-                <input type="date"  id={this.props.name} name={this.props.name} disabled={this.props.disabled}/>
+                <input type="date"  id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>
                 :
                 <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>}<br/>
             </div>

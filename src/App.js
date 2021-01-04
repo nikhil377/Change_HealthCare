@@ -10,25 +10,38 @@ class App extends Component {
     super(props);
     this.state = {
       active: "patient",
-      dataToDisplay: ""
+      patientDataToDisplay: "",
+      studyDataToDisplay:""
     }
+    this.updateStudyData=this.updateStudyData.bind(this);
+    this.updatePatientData=this.updatePatientData.bind(this);
   }
   changeComponentView = (e) => {
-    console.log(e.target.value);
     this.setState({
       active: e.target.value
     });
   }
-  updateData(value) {
-    console.log("value", value)
+  updatePatientData(value) {
+    console.log("PatientData", value)
     return () => {
       this.setState({
-        dataToDisplay: value
+        patientDataToDisplay: value
+      },()=>{
+        console.log("parent data",this.state.patientDataToDisplay);
+      });
+    }
+  }
+  updateStudyData(value){
+    console.log("studyDataToDisplay", value)
+    return () => {
+      this.setState({
+        studyDataToDisplay: value
       });
     }
   }
   render() {
-    const { active } = this.state;
+    const { active,patientDataToDisplay } = this.state;
+    console.log("updated state",patientDataToDisplay)
     return (
       <div className="App">
         <Header />
@@ -37,9 +50,10 @@ class App extends Component {
             <div className="search-text">Search</div>
             <button className={active === "patient" ? "dark-grey-button" : "light-grey-button"} value="patient" onClick={this.changeComponentView}>PATIENT</button>
             <button className={active === "study" ? "dark-grey-button" : "light-grey-button"} value="study" onClick={this.changeComponentView}>STUDY</button>
+            <p className="select-category-text">Select one of the category below:</p>
             {active === "patient" ? 
-              <PatientComponent  data={this.updateData.bind(this)} />
-              : <StudyComponent data={this.updateData.bind(this)} />
+              <PatientComponent  data={this.updatePatientData} />
+              : <StudyComponent data={this.updateStudyData} />
             }
           </div>
           <AsideResult activeComponent={active} />
