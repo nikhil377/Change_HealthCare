@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 export default function AsideResult(props) {
     return (
         props.activeComponent==="patient"? 
-        <div>
+        <div className="aside-results-box">
             <h2>Patient Search Results <span className="record-numbers">-0 records found.</span></h2>
             <Container className="filter-container">
             <Row>
@@ -19,7 +19,7 @@ export default function AsideResult(props) {
             <span className="no-records-text">No records to be displayed at this time</span>
           
         </div>
-        :props.activeComponent==="study"? <div>
+        :props.activeComponent==="study"? <div className="aside-results-box">
         <h2>Patient Search Results <span className="record-numbers">-0 records found.</span></h2>
         <Container className="filter-container">
         <Row>
