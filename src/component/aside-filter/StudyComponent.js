@@ -66,7 +66,7 @@ class StudyComponent extends Component {
                  <label for="performed-date">Performed Date Range</label>
                  <InputBox type="date" name="Start Date" isMandatory="true" disabled={value!=="Performed Date Range"}/>
                  <InputBox type="date" name="End Date" isMandatory="true" disabled={value!=="Performed Date Range"}/>
-                 <button type="submit" className="search-button" disabled>SEARCH</button>
+                 <button type="submit" className="disabled-search-button" disabled>SEARCH</button>
                  <button type="reset" value="reset" className="clear-all-button">CLEAR ALL</button>
             </div>
         );

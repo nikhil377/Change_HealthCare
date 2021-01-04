@@ -62,11 +62,17 @@
     margin-top:10px;
     margin-left:35px;
   }
-  .search-button{
+  .disabled-search-button{
     width: 150px;
     height: 40px;
     color: gray;
     background-color: #a5e5ff;
+    margin-left: 10px;
+  }
+  .search-button{
+    width: 150px;
+    height: 40px;
+    color: gray;
     margin-left: 10px;
   }
   .clear-all-button{

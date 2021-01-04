@@ -76,9 +76,8 @@ export default class AsideFilter extends Component {
     //     })
     // }
     render(){
-        const {value,filteredData}=this.state;
+         const {value,filteredData}=this.state;
          const disabledSumbit= filteredData[0].firstName.length<=0 && filteredData[0].patientId.length<=0 && filteredData[0].internalId.length<=0
-
         return (
         <div>  
             <form onSubmit={this.submitData()}>        
@@ -122,7 +121,7 @@ export default class AsideFilter extends Component {
 
                 <label for="internal-id">Internal ID</label>
                 <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}  data={this.getInputFilteredData.bind(this)}/>
-                <button type="submit" className="search-button" disabled={disabledSumbit}>SEARCH</button>
+                <button type="submit" className="disabled-search-button" disabled={disabledSumbit}>SEARCH</button>
                 <button className="clear-all-button">CLEAR ALL</button>
                 </div>
                 :   <StudyComponent/>
