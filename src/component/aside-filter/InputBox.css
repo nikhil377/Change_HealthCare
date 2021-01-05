@@ -1,12 +1,22 @@
 .input-box{
     margin: 10px 0px 10px 35px;
 }
-.multi-select-box{
+.multi-select-box-disabled{
     margin-left: 35px;
+    pointer-events:none;
 }
-.css-1r4vtzz{
+.multi-select-box-disabled .css-1r4vtzz{
     padding: 0px !important;
+    background-color: #EFEFEF4D !important;
+    color: black;
 }
 .css-1jllj6i-control{
     padding: 0px !important;
+}
+.multi-select-box{
+    margin-left: 35px;
+}
+.multi-select-box .css-1r4vtzz{
+    padding: 0px !important;
+    background-color: white !important;
 }

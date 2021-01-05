@@ -3,7 +3,7 @@ import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import './InputBox.css'
 import options from "./data";
 
-const MultiSelectAll = () => {
+const MultiSelectAll = (props) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   useEffect(() => {
@@ -34,9 +34,10 @@ const MultiSelectAll = () => {
       this.setState(value);
     }
   }
-
+const active=props.active; 
   return (
-      <div  className="multi-select-box">
+    active?
+      <div className="multi-select-box">
 
 <ReactMultiSelectCheckboxes
       options={[{ label: "All", value: "*" }, ...options]}
@@ -46,7 +47,19 @@ const MultiSelectAll = () => {
       onChange={onChange}
       setState={setSelectedOptions}
     />
+      </div>: 
+      <div className="multi-select-box-disabled">
+      <ReactMultiSelectCheckboxes
+      options={[{ label: "All", value: "*" }, ...options]}
+      placeholderButtonLabel="Search or Select All"
+      getDropdownButtonLabel={getDropdownButtonLabel}
+      value={selectedOptions}
+      onChange={onChange}
+      setState={setSelectedOptions}
+      disabled
+    />
       </div>
+
   );
 };
 

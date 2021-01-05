@@ -106,7 +106,7 @@ export default class PatientComponent extends Component {
                 <label for="patient-id">Patient ID & Issuer</label>
                 <InputBox name="Patient Id" isMandatory="true"  disabled={value!=="Patient ID & Issuer"} data={this.getInputFilteredData.bind(this)}/>
                 <label className="issuer-label" for="issuer">Issuer</label>
-                <MultiSelectAll />
+                <MultiSelectAll  active={value==="Patient ID & Issuer"} />
                 <hr/>
     
                 <input 

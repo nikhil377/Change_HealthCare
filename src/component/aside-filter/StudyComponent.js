@@ -71,7 +71,7 @@ class StudyComponent extends Component {
                 <label for="accession-number">Accession Number & Issuer</label>
                 <InputBox name="Accession Number" isMandatory="true" disabled={value!=="Accession Number & Issuer"}  data={this.getInputFilteredData.bind(this)}/>
                 <label className="issuer-label" for="issuer">Issuer</label>
-                <MultiSelectAll />
+                <MultiSelectAll  active={value==="Accession Number & Issuer"} /> 
                 <hr/>
     
                 <input 
