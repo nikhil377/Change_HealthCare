@@ -1,6 +1,6 @@
 .aside-filter-box{
     background-color:#D3D3D3;
-    width:30%;
+    width:100%;
     padding-left: 10px;
 }
 .search-text{
@@ -68,6 +68,7 @@
     color: gray;
     background-color: #a5e5ff;
     margin-left: 10px;
+    margin-bottom: 20px;
   }
   .search-button{
     width: 150px;
@@ -80,7 +81,15 @@
     height: 40px;
     color:black;
     background-color: gainsboro;
+    margin-bottom: 20px;
   }
   label{
     margin-left: 5px;
   }
+  .patient-container{
+    display: flex;
+  }
+.patient-form{
+  padding-right: 28px;
+  width: 30%;
+}

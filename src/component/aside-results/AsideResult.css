@@ -18,5 +18,7 @@ h2{
     width: auto;
 }
 .aside-results-box{
-    width: 70%;
+    background: white;
+    margin-top: -11%;
+    width: 100%;
 }

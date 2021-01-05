@@ -6,7 +6,7 @@ export default [{
   }, {
     "id": 2,
     "value": "90419f06-7d07-45c8-bcec-d675096fe27f",
-    "label": "Imeptus"
+    "label": "Impetus"
   }, {
     "id": 3,
     "value": "a23521da-0a48-4ef6-baa2-d727704f65c2",

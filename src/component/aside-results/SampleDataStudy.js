@@ -1,0 +1,34 @@
+// eslint-disable-next-line
+export default [{
+    "accessionNumber": "2",
+    "modalities": "sample1",
+    "name": "Rohan",
+    "noOfObjects": "12",
+    "noSeries": "88",
+    "patientId": "12",
+    "performedDate": "2018-01-21"
+  }, {
+    "accessionNumber": "3",
+    "modalities": "sample2",
+    "name": "Aditya",
+    "noOfObjects": "90",
+    "noSeries": "17",
+    "patientId": "1",
+    "performedDate": "2019-03-01"
+  }, {
+    "accessionNumber": "4",
+    "modalities": "sample3",
+    "name": "Sid",
+    "noOfObjects": "43",
+    "noSeries": "27",
+    "patientId": "20",
+    "performedDate": "2020-02-21"
+  }, {
+    "accessionNumber": "5",
+    "modalities": "sample4",
+    "name": "ABC",
+    "noOfObjects": "4",
+    "noSeries": "7",
+    "patientId": "19",
+    "performedDate": "2023-01-21"
+  }]

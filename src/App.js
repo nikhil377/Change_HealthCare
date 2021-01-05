@@ -1,7 +1,6 @@
 import './App.css';
 import Header from './component/header/Header'
 import PatientComponent from './component/aside-filter/PatientComponent';
-import AsideResult from './component/aside-results/AsideResult';
 import { Component } from 'react';
 import StudyComponent from './component/aside-filter/StudyComponent';
 
@@ -52,11 +51,10 @@ class App extends Component {
             <button className={active === "study" ? "dark-grey-button" : "light-grey-button"} value="study" onClick={this.changeComponentView}>STUDY</button>
             <p className="select-category-text">Select one of the category below:</p>
             {active === "patient" ? 
-              <PatientComponent  data={this.updatePatientData} />
-              : <StudyComponent data={this.updateStudyData} />
+              <PatientComponent  activeComponent={active} data={this.updatePatientData} />
+              : <StudyComponent activeComponent={active} data={this.updateStudyData} />
             }
           </div>
-          <AsideResult activeComponent={active} />
         </div>
       </div>
     );

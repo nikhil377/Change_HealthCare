@@ -3,6 +3,7 @@ import React from 'react';
 import  './PatientComponent.css'
 import InputBox from './InputBox';
 import MultiSelectAll from './MultiSelectAll.js'
+import AsideResult from '../aside-results/AsideResult'
 
 export default class PatientComponent extends Component {
     constructor(props){
@@ -15,11 +16,12 @@ export default class PatientComponent extends Component {
                 lastname:"",
                 patientId:"",
                 internalId:"",
-                Issuer:"Change Health-care",
+                Issuer:"Impetus",
                 status: "On track",
                 dateOfBirth:"12 Nov, 1997",
                 gender:"Male"
-           }]
+           }],
+           submitClicked:false
         } 
         this.state=JSON.parse(JSON.stringify(this.initialState))
     
@@ -66,22 +68,20 @@ export default class PatientComponent extends Component {
         }
         }
     }
-    // resetFields=(e)=>{
-    //     e.preventDefault();
-    //     const initialData= this.initialState.filteredData;
-    //     console.log("inital state", this.initialState.filteredData);
-    //     this.setState({
-    //         initialData
-    //     })
-    // }
+    submitClicked=(e)=>{
+        e.preventDefault()
+        this.setState({
+            submitClicked:true
+        })
+    }
     render(){
-         const {value,filteredData}=this.state;
+         const {value,filteredData,submitClicked}=this.state;
          console.log("updated state in patient ", filteredData);
          const disabledSumbit= filteredData[0].firstName.length<=0 && filteredData[0].patientId.length<=0 && filteredData[0].internalId.length<=0
         return (
-        <div>  
-            <form onSubmit={this.submitData()}>
-            <div>
+        <div className="patient-container">  
+            <form onSubmit={this.submitData()} className="patient-form">
+                <div>
                 <input 
                         type="radio" 
                         id="patient-name" 
@@ -119,11 +119,12 @@ export default class PatientComponent extends Component {
 
                 <label for="internal-id">Internal ID</label>
                 <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}  data={this.getInputFilteredData.bind(this)}/>
-                <button type="submit" className="disabled-search-button" disabled={disabledSumbit}>SEARCH</button>
+                <button type="submit" className="disabled-search-button" disabled={disabledSumbit} onClick={this.submitClicked}>SEARCH</button>
                 <button className="clear-all-button">CLEAR ALL</button>
                 </div>
                 </form>    
-            </div>
+                <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked}/>
+        </div>
       
         )
     }

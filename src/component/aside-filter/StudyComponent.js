@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 import MultiSelectAll from './MultiSelectAll.js'
 import InputBox from './InputBox';
+import AsideResult from '../aside-results/AsideResult'
+
 class StudyComponent extends Component {
     constructor(props){
         super(props);
         this.state={
            value:"Accession Number & Issuer",
            filteredData:[{
-            name:"ABCDE",
+            name:"Ron",
             patientId:"1245",
             accessionNumber:"",
             performedDate:"",
             modalities: "sample",
             noOfObjects:"4",
             noSeries:"7"
-       }]
-        }  
-    }
+       }],
+       submitClicked:false
+    }  
+ }
+ submitClicked=(e)=>{
+    e.preventDefault()
+    this.setState({
+        submitClicked:true
+    })
+}
     submitData=()=>{
         this.props.data(this.state.filteredData)
     }
@@ -45,10 +54,10 @@ class StudyComponent extends Component {
         
     }
     render() {
-        const {value}=this.state;
+        const {value,filteredData,submitClicked}=this.state;
         return (
-            <div>
-                 <form onSubmit={this.submitData()}>  
+            <div className="patient-container">  
+            <form onSubmit={this.submitData()} className="patient-form">
                    <input 
                         type="radio" 
                         id="accession-number" 
@@ -97,9 +106,10 @@ class StudyComponent extends Component {
                  <label for="performed-date">Performed Date Range</label>
                  <InputBox type="date" name="Start Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)} />
                  <InputBox type="date" name="End Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)}/>
-                 <button type="submit" className="disabled-search-button" disabled>SEARCH</button>
+                 <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
                  <button type="reset" value="reset" className="clear-all-button">CLEAR ALL</button>
                  </form>
+                 <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked}/>
             </div>
         );
     }
