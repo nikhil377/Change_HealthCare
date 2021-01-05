@@ -55,6 +55,8 @@ class StudyComponent extends Component {
     }
     render() {
         const {value,filteredData,submitClicked}=this.state;
+        const disabledSumbit=(filteredData[0].accessionNumber.length<=0) || (filteredData[0].performedDate.length<=0)
+        console.log("true or not",disabledSumbit)
         return (
             <div className="patient-container">  
             <form onSubmit={this.submitData()} className="patient-form">
@@ -106,8 +108,8 @@ class StudyComponent extends Component {
                  <label for="performed-date">Performed Date Range</label>
                  <InputBox type="date" name="Start Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)} />
                  <InputBox type="date" name="End Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)}/>
-                 <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
-                 <button type="reset" value="reset" className="clear-all-button">CLEAR ALL</button>
+                 <button type="submit" className="disabled-search-button" onClick={this.submitClicked} disabled={disabledSumbit}>SEARCH</button>
+                 <button className="clear-all-button">CLEAR ALL</button>
                  </form>
                  <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked}/>
             </div>

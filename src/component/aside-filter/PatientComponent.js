@@ -77,7 +77,7 @@ export default class PatientComponent extends Component {
     render(){
          const {value,filteredData,submitClicked}=this.state;
          console.log("updated state in patient ", filteredData);
-         const disabledSumbit= filteredData[0].firstName.length<=0 && filteredData[0].patientId.length<=0 && filteredData[0].internalId.length<=0
+         const disabledSumbit= (filteredData[0].firstName.length<=0) && (filteredData[0].patientId.length<=0) && (filteredData[0].internalId.length<=0)
         return (
         <div className="patient-container">  
             <form onSubmit={this.submitData()} className="patient-form">

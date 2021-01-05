@@ -3,13 +3,30 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Component } from 'react';
 import SampleData from './SampleData';
 import SampleDataStudy from './SampleDataStudy';
+import { MDBIcon} from "mdbreact";
 export default class AsideResult extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            iconUp: 'chevron-up'
+        }
+    }
+    changeIcon=()=>{
+        if(this.state.iconUp==="chevron-up"){
+        this.setState({
+            iconUp:'chevron-down'
+        })
+    }
+    if(this.state.iconUp==="chevron-down"){
+        this.setState({
+            iconUp:'chevron-up'
+        })
+    }
+    }
     render(){
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
-        console.log("this props patient data",this.props)
         const{dataToDisplay,submitClicked}=this.props;
-        console.log("data to display",dataToDisplay);
         if(submitClicked && patientComponent){
             Array.prototype.push.apply(dataToDisplay,SampleData); 
             console.log("final data to display",dataToDisplay);
@@ -18,17 +35,23 @@ export default class AsideResult extends Component {
             Array.prototype.push.apply(dataToDisplay,SampleDataStudy); 
             console.log("final data to display",dataToDisplay);
         }
+        const finalCount= dataToDisplay.length;
+        console.log("finalcount",finalCount);
         return (
             patientComponent? 
             <div className="aside-results-box">
-                <h2>Patient Search Results <span className="record-numbers">-0 records found.</span></h2>
+            {submitClicked? 
+            <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
+                <button className="download-all-button">Download All</button>
+            </h2>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
+                </h2>}
                 <Container className="filter-container">
                 <Row>
-                    <Col sm={2}>Name &#x25B2;</Col>
+                    <Col key="name" onClick={this.changeIcon} sm={2}>Name  <MDBIcon icon={this.state.iconUp} /></Col>
                     <Col sm={2}>Patient ID</Col>
-                    <Col sm={2}>Issuer &#x25B2;</Col>
-                    <Col sm={2}>Status &#x25B2;</Col>
-                    <Col sm={2}>Date of Birth &#x25B2;</Col>
+                    <Col onClick={this.changeIcon} sm={2}>Issuer <MDBIcon icon={this.state.iconUp} /></Col>
+                    <Col onClick={this.changeIcon} sm={2}>Status <MDBIcon icon={this.state.iconUp} /></Col>
+                    <Col onClick={this.changeIcon} sm={2}>Date of Birth <MDBIcon icon={this.state.iconUp} /></Col>
                     <Col sm={2}>Gender</Col>
                 </Row>            
                 </Container>
@@ -38,12 +61,12 @@ export default class AsideResult extends Component {
                     return(
                     <Container className="filter-container">
                     <Row>
-                        <Col sm={2}>{value.lastname}</Col>
-                        <Col sm={2}>{value.patientId}</Col>
-                        <Col sm={2}>{value.Issuer}</Col>
-                        <Col sm={2}>{value.status}</Col>
-                        <Col sm={2}>{value.dateOfBirth}</Col>
-                        <Col sm={2}>{value.gender}</Col>
+                        <Col sm={2} key={Math.random()}>{value.firstname}{value.lastname}</Col>
+                        <Col sm={2} key={Math.random()}>{value.patientId}</Col>
+                        <Col sm={2} key={Math.random()}>{value.Issuer}</Col>
+                        <Col sm={2} key={Math.random()}>{value.status}</Col>
+                        <Col sm={2} key={Math.random()}>{value.dateOfBirth}</Col>
+                        <Col sm={2} key={Math.random()}>{value.gender}</Col>
                     </Row>
                     </Container>
                     )
@@ -54,7 +77,11 @@ export default class AsideResult extends Component {
             
             </div>
             :StudyComponent? <div className="aside-results-box">
-            <h2>Patient Search Results <span className="record-numbers">-0 records found.</span></h2>
+             {submitClicked? 
+            <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
+                <button className="download-all-button">Download All</button>
+            </h2>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
+                </h2>}
             <Container className="filter-container">
             <Row>
                 <Col sm={1}>Name&#x25B2;</Col>
@@ -72,13 +99,13 @@ export default class AsideResult extends Component {
                     return(
                     <Container className="filter-container">
                     <Row>
-                        <Col sm={1}>{value.name}</Col>
-                        <Col sm={2}>{value.patientId}</Col>
-                        <Col sm={2}>{value.accessionNumber}</Col>
-                        <Col sm={2}>{value.performedDate}</Col>
-                        <Col sm={1}>{value.modalities}</Col>
-                        <Col sm={2}>{value.noOfObjects}</Col>
-                        <Col sm={2}>{value.noSeries}</Col>
+                        <Col sm={1} key={Math.random()}>{value.name}</Col>
+                        <Col sm={2} key={Math.random()}>{value.patientId}</Col>
+                        <Col sm={2} key={Math.random()}>{value.accessionNumber}</Col>
+                        <Col sm={2} key={Math.random()}>{value.performedDate}</Col>
+                        <Col sm={1} key={Math.random()}>{value.modalities}</Col>
+                        <Col sm={2} key={Math.random()}>{value.noOfObjects}</Col>
+                        <Col sm={2} key={Math.random()}>{value.noSeries}</Col>
                     </Row>
                     </Container>
                     )
