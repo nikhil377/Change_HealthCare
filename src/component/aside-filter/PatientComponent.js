@@ -13,13 +13,9 @@ export default class PatientComponent extends Component {
            component:"patient",
            filteredData:[{
                 firstName:"",
-                lastname:"",
+                lastName:"",
                 patientId:"",
-                internalId:"",
-                Issuer:"Impetus",
-                status: "On track",
-                dateOfBirth:"12 Nov, 1997",
-                gender:"Male"
+                internalId:""
            }],
            submitClicked:false
         } 
@@ -46,7 +42,7 @@ export default class PatientComponent extends Component {
         if(value.includes("Last Name")){
             value=value.split("Last Name");
             const filteredData = this.state.filteredData.slice();
-            filteredData[0].lastname = value[1];
+            filteredData[0].lastName = value[1];
             return()=>{
                 this.setState({ filteredData });
         }
@@ -59,8 +55,8 @@ export default class PatientComponent extends Component {
                 this.setState({ filteredData });
         }
         }
-        if(value.includes("Internal Id")){
-            value=value.split("Internal Id");
+        if(value.includes("Internal ID")){
+            value=value.split("Internal ID");
             const filteredData = this.state.filteredData.slice();
                 filteredData[0].internalId = value[1];
             return()=>{
@@ -77,7 +73,6 @@ export default class PatientComponent extends Component {
     render(){
          const {value,filteredData,submitClicked}=this.state;
          console.log("updated state in patient ", filteredData);
-         const disabledSumbit= (filteredData[0].firstName.length<=0) && (filteredData[0].patientId.length<=0) && (filteredData[0].internalId.length<=0)
         return (
         <div className="patient-container">  
             <form onSubmit={this.submitData()} className="patient-form">
@@ -119,7 +114,7 @@ export default class PatientComponent extends Component {
 
                 <label for="internal-id">Internal ID</label>
                 <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}  data={this.getInputFilteredData.bind(this)}/>
-                <button type="submit" className="disabled-search-button" disabled={disabledSumbit} onClick={this.submitClicked}>SEARCH</button>
+                <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
                 <button className="clear-all-button">CLEAR ALL</button>
                 </div>
                 </form>    

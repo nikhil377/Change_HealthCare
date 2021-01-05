@@ -24,23 +24,108 @@ export default class AsideResult extends Component {
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
+        let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
-            Array.prototype.push.apply(dataToDisplay,SampleData); 
-            console.log("final data to display",dataToDisplay);
+            console.log("data from parent compo", dataToDisplay)
+            let switchCase= dataToDisplay[0];
+            let firstName = switchCase.firstName.length>0;
+            let lastName = switchCase.lastName.length>0;
+            let patientId = switchCase.patientId.length>0;
+            let internalId = switchCase.internalId.length>0;
+            
+            if(firstName){
+                for(let i=0;i<SampleData.length;i++){
+                    if(SampleData[i].firstName===switchCase.firstName){
+                        filteredDataToDisplay.push(SampleData[i]);
+                    }
+                }
+                console.log("filtered data-->", filteredDataToDisplay);
+            }
+            if(lastName){
+                for(let i=0;i<SampleData.length;i++){
+                    if(SampleData[i].lastName===switchCase.lastName){
+                        filteredDataToDisplay.push(SampleData[i]);
+                    }
+                }
+            }
+            if(patientId){
+                for(let i=0;i<SampleData.length;i++){
+                    if(SampleData[i].patientId===switchCase.patientId){
+                        filteredDataToDisplay.push(SampleData[i]);
+                    }
+                }
+            }
+            if(internalId){
+                for(let i=0;i<SampleData.length;i++){
+                    if(SampleData[i].internalId===switchCase.internalId){
+                        filteredDataToDisplay.push(SampleData[i]);
+                    }
+                }
+            }
+
         }
         if(submitClicked && StudyComponent){
-            Array.prototype.push.apply(dataToDisplay,SampleDataStudy); 
-            console.log("final data to display",dataToDisplay);
+            console.log("data from parent compo", dataToDisplay)
+            let switchCase= dataToDisplay[0];
+            let accessionNumber = switchCase.accessionNumber.length>0;
+            let performedEndDate = switchCase.performedEndDate.length>0;
+            let performedStartDate = switchCase.performedStartDate.length>0;
+            let sopInstanceUID = switchCase.sopInstanceUID.length>0;
+            let studyUID = switchCase.studyUID.length>0;
+            if(accessionNumber){
+                for(let i=0;i<SampleDataStudy.length;i++){
+                    if(SampleDataStudy[i].accessionNumber===switchCase.accessionNumber){
+                        filteredDataToDisplay.push(SampleDataStudy[i]);
+                    }
+                }
+                console.log("filtered data-->", filteredDataToDisplay);
+            }
+            if(performedEndDate){
+                for(let i=0;i<SampleDataStudy.length;i++){
+                    if(SampleDataStudy[i].performedEndDate===switchCase.performedEndDate){
+                        filteredDataToDisplay.push(SampleDataStudy[i]);
+                    }
+                }
+            }
+            if(performedStartDate){
+                for(let i=0;i<SampleDataStudy.length;i++){
+                    if(SampleDataStudy[i].performedStartDate===switchCase.performedStartDate){
+                        filteredDataToDisplay.push(SampleDataStudy[i]);
+                    }
+                }
+            }
+            if(sopInstanceUID){
+                for(let i=0;i<SampleDataStudy.length;i++){
+                    if(SampleDataStudy[i].sopInstanceUID===switchCase.sopInstanceUID){
+                        filteredDataToDisplay.push(SampleDataStudy[i]);
+                    }
+                }
+            }
+            if(studyUID){
+                for(let i=0;i<SampleDataStudy.length;i++){
+                    if(SampleDataStudy[i].studyUID===switchCase.studyUID){
+                        filteredDataToDisplay.push(SampleDataStudy[i]);
+                    }
+                }
+            }
+
         }
-        const finalCount= dataToDisplay.length;
+        const finalCount= filteredDataToDisplay.length;
         console.log("finalcount",finalCount);
         return (
             patientComponent? 
             <div className="aside-results-box">
-            {submitClicked? 
+            {submitClicked && finalCount>0? 
+            <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
                 <button className="download-all-button">Download All</button>
-            </h2>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
+            </h2> 
+            <div className="place-holder-patient">
+                <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].lastName}</strong></span>
+                <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
+                <span className="patient-id">Date of Birth:<strong>{filteredDataToDisplay[0].dob}</strong></span>
+                <span className="patient-id">Gender:<strong>{filteredDataToDisplay[0].gender}</strong></span>
+            </div></>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
                 </h2>}
                 <Container className="filter-container">
                 <Row>
@@ -52,13 +137,13 @@ export default class AsideResult extends Component {
                     <Col sm={2}>Gender</Col>
                 </Row>            
                 </Container>
-                {submitClicked?
-                dataToDisplay.map((value,index)=>{
+                {submitClicked && finalCount>0?
+                filteredDataToDisplay.map((value,index)=>{
                     console.log("valueeee-->",value);
                     return(
-                    <Container className="filter-container">
+                    <Container className="filter-container filtered-display-data">
                     <Row>
-                        <Col sm={2} key={Math.random()}>{value.lastname}</Col>
+                        <Col sm={2} key={Math.random()}>{value.lastName}</Col>
                         <Col sm={2} key={Math.random()}>{value.patientId}</Col>
                         <Col sm={2} key={Math.random()}>{value.Issuer}</Col>
                         <Col sm={2} key={Math.random()}>{value.status}</Col>
@@ -74,10 +159,17 @@ export default class AsideResult extends Component {
             
             </div>
             :StudyComponent? <div className="aside-results-box">
-             {submitClicked? 
-            <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
-                <button className="download-all-button">Download All</button>
-            </h2>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
+             {submitClicked && finalCount>0? 
+                <>
+                <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
+                    <button className="download-all-button">Download All</button>
+                </h2> 
+                <div className="place-holder-patient">
+                    <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].name}</strong></span>
+                    <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
+                    <span className="patient-id">Date of Birth:<strong>{filteredDataToDisplay[0].dob}</strong></span>
+                    <span className="patient-id">Gender:<strong>{filteredDataToDisplay[0].gender}</strong></span>
+                </div></>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
                 </h2>}
             <Container className="filter-container">
             <Row>
@@ -90,11 +182,11 @@ export default class AsideResult extends Component {
                 <Col sm={2}>No. Series</Col>
             </Row>
             </Container>
-            {submitClicked?
-                dataToDisplay.map((value,index)=>{
+            {submitClicked && finalCount>0?
+                filteredDataToDisplay.map((value,index)=>{
                     console.log("valueeee-->",value);
                     return(
-                    <Container className="filter-container">
+                    <Container className="filter-container filtered-display-data">
                     <Row>
                         <Col sm={1} key={Math.random()}>{value.name}</Col>
                         <Col sm={2} key={Math.random()}>{value.patientId}</Col>

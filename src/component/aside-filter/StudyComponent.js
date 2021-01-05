@@ -9,13 +9,11 @@ class StudyComponent extends Component {
         this.state={
            value:"Accession Number & Issuer",
            filteredData:[{
-            name:"Ron",
-            patientId:"1245",
             accessionNumber:"",
-            performedDate:"",
-            modalities: "sample",
-            noOfObjects:"4",
-            noSeries:"7"
+            performedStartDate:"",
+            performedEndDate:"",
+            studyUID:"",
+            sopInstanceUID:""
        }],
        submitClicked:false
     }  
@@ -43,6 +41,14 @@ class StudyComponent extends Component {
                 this.setState({ filteredData });
         }
         }
+        if(value.includes("Start Date")){
+            value=value.split("Start Date");
+            const filteredData = this.state.filteredData.slice();
+                filteredData[0].performedStartDate = value[1];
+            return()=>{
+                this.setState({ filteredData });
+        }
+    }
         if(value.includes("End Date")){
             value=value.split("End Date");
             const filteredData = this.state.filteredData.slice();
@@ -51,12 +57,26 @@ class StudyComponent extends Component {
                 this.setState({ filteredData });
         }
     }
+            if(value.includes("Study UID")){
+                value=value.split("Study UID");
+                const filteredData = this.state.filteredData.slice();
+                    filteredData[0].studyUID = value[1];
+                return()=>{
+                    this.setState({ filteredData });
+            }
+        }
+        if(value.includes("SOP Instance UID")){
+            value=value.split("SOP Instance UID");
+            const filteredData = this.state.filteredData.slice();
+                filteredData[0].sopInstanceUID = value[1];
+            return()=>{
+                this.setState({ filteredData });
+        }
+        }
         
     }
     render() {
         const {value,filteredData,submitClicked}=this.state;
-        const disabledSumbit=(filteredData[0].accessionNumber.length<=0) || (filteredData[0].performedDate.length<=0)
-        console.log("true or not",disabledSumbit)
         return (
             <div className="patient-container">  
             <form onSubmit={this.submitData()} className="patient-form">
@@ -108,7 +128,7 @@ class StudyComponent extends Component {
                  <label for="performed-date">Performed Date Range</label>
                  <InputBox type="date" name="Start Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)} />
                  <InputBox type="date" name="End Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)}/>
-                 <button type="submit" className="disabled-search-button" onClick={this.submitClicked} disabled={disabledSumbit}>SEARCH</button>
+                 <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
                  <button className="clear-all-button">CLEAR ALL</button>
                  </form>
                  <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked}/>
