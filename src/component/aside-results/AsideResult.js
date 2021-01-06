@@ -173,13 +173,13 @@ export default class AsideResult extends Component {
                 </h2>}
             <Container className="filter-container">
             <Row>
-                    <Col id={icon.id+"name"} onClick={() => this.changeIcon(icon.id+"name")} sm={1}>Name <MDBIcon icon={this.state[icon.id+"name"] ? "chevron-up" : "chevron-down"}/> </Col>
+                    <Col id={icon.id+"name"} onClick={() => this.changeIcon(icon.id+"name")} sm={2}>Name <MDBIcon icon={this.state[icon.id+"name"] ? "chevron-up" : "chevron-down"}/> </Col>
                     <Col id={icon.id+"patientId"} onClick={() => this.changeIcon(icon.id+"patientId")} sm={2}>Patient ID <MDBIcon icon={this.state[icon.id+"patientId"] ? "chevron-up" : "chevron-down"}/></Col>
-                    <Col id={icon.id+"accessionNo"} onClick={() => this.changeIcon(icon.id+"accessionNo")} sm={2}>Accession No. <MDBIcon icon={this.state[icon.id+"accessionNo"] ? "chevron-up" : "chevron-down"}/></Col>
+                    <Col id={icon.id+"accessionNo"} onClick={() => this.changeIcon(icon.id+"accessionNo")} sm={2}>Accession No.<MDBIcon icon={this.state[icon.id+"accessionNo"] ? "chevron-up" : "chevron-down"}/></Col>
                     <Col id={icon.id+"performedDate"} onClick={() => this.changeIcon(icon.id+"performedDate")} sm={2}>Performed Date <MDBIcon icon={this.state[icon.id+"performedDate"] ? "chevron-up" : "chevron-down"} /></Col>
                 <Col sm={1}>Modalities</Col>
-                <Col sm={2}>No. Objects</Col>
-                <Col sm={2}>No. Series</Col>
+                <Col sm={2} className="col-no-objects">No. Objects</Col>
+                <Col sm={1} className="col-no-series">No. Series</Col>
             </Row>
             </Container>
             {submitClicked && finalCount>0?
@@ -188,13 +188,13 @@ export default class AsideResult extends Component {
                     return(
                     <Container className="filter-container filtered-display-data">
                     <Row>
-                        <Col sm={1} key={Math.random()}>{value.name}</Col>
+                        <Col sm={2} key={Math.random()}>{value.name}</Col>
                         <Col sm={2} key={Math.random()}>{value.patientId}</Col>
                         <Col sm={2} key={Math.random()}>{value.accessionNumber}</Col>
                         <Col sm={2} key={Math.random()}>{value.performedDate}</Col>
                         <Col sm={1} key={Math.random()}>{value.modalities}</Col>
-                        <Col sm={2} key={Math.random()}>{value.noOfObjects}</Col>
-                        <Col sm={2} key={Math.random()}>{value.noSeries}</Col>
+                        <Col sm={2} key={Math.random()} className="text-center">{value.noOfObjects}</Col>
+                        <Col sm={1} key={Math.random()}>{value.noSeries}</Col>
                     </Row>
                     </Container>
                     )
