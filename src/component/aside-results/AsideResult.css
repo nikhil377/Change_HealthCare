@@ -71,3 +71,35 @@ h2{
 .text-center{
     text-align: center;
 }
+.failure-banner{
+    padding-top: 8px;
+    display: flex;
+    place-content: center;
+    background-color: #C70039;
+    height: 52px;
+}
+.banner-text-error{
+    color: white;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.cross-button{
+    float: right;
+    color: white;
+    cursor: pointer;
+    padding-top: 10px;
+    position: absolute;
+    right: 20px;
+}
+.success-banner{
+    padding-top: 8px;
+    display: flex;
+    place-content: center;
+    background-color: #308310;
+    height: 52px;
+}
+.banner-text-success{
+    color: white;
+    padding-top: 10px;
+    padding-left: 10px;
+}

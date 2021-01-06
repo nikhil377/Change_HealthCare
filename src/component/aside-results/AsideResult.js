@@ -5,6 +5,8 @@ import SampleData from './SampleData';
 import SampleDataStudy from './SampleDataStudy';
 import { MDBIcon} from "mdbreact";
 import sample from './sample.pdf'
+import success from './success.png'
+import failure from './error.png';
 
 const icon = [
     { id: 0, name: 'chevron-up' },
@@ -27,14 +29,14 @@ export default class AsideResult extends Component {
             this.setState({
                 showBanner:true
             })
-        },5000)
+        },1000)
     }
     showFailureBanner=()=>{
         setTimeout(()=>{
             this.setState({
                 showFailureBanner:true
             })
-        },5000)
+        },1000)
     }
     
     render(){
@@ -133,7 +135,13 @@ export default class AsideResult extends Component {
         return (
             patientComponent? 
             <div className="aside-results-box">
-            {showBanner? <div>download banner</div>: showFailureBanner ? <div>failure banner</div>:null}
+            {showBanner?  <div className="success-banner">
+                <img src={success} alt="success" width="45" height="42"/><div className="banner-text-error">All studies have been downloaded successfully `${finalCount/finalCount}`</div> <div className="cross-button">X</div>
+            </div>: showFailureBanner ? 
+            <div className="failure-banner">
+                <img src={failure} alt="success" width="45" height="42"/><div className="banner-text-error">Download was unable to complete. Please try again </div> <div className="cross-button">X</div>
+            </div>
+            :null}
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
@@ -181,7 +189,9 @@ export default class AsideResult extends Component {
             </div>
             :StudyComponent? 
             <div className="aside-results-box">
-             {showBanner? <div>download banner</div>: showFailureBanner ? <div>failure banner</div>:null}
+               {showBanner?  <div className="success-banner">
+                <img src={success} alt="success" width="45" height="42"/><div className="banner-text-success">All studies have been downloaded successfully {finalCount}</div> <div className="cross-button">X</div>
+            </div>: showFailureBanner ? <div>failure banner</div>:null}
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
