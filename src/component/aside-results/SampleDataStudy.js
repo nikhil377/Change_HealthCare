@@ -55,4 +55,19 @@ export default [{
     "gender": "Male",
     "performedDate": "2021-01-09",
     "dob":"02/28/1976"
+  },
+  {
+    "performedEndDate": "2021-01-09",
+    "performedStartDate": "2021-01-09",
+    "sopInstanceUID": "6",
+    "studyUID": "10",
+    "accessionNumber": "2",
+    "modalities": "sample4",
+    "name": "ABC",
+    "noOfObjects": "4",
+    "noSeries": "7",
+    "patientId": "19",
+    "gender": "Male",
+    "performedDate": "2021-01-09",
+    "dob":"02/28/1976"
   }]

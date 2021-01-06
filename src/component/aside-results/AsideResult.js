@@ -18,7 +18,8 @@ export default class AsideResult extends Component {
         this.state={
             iconUp: 'chevron-up',
             showBanner:false,
-            showFailureBanner:false
+            showFailureBanner:false,
+            crossClicked: false
         }
     }
     changeIcon=(id)=>{
@@ -27,23 +28,29 @@ export default class AsideResult extends Component {
     showDownloadBanner=()=>{
         setTimeout(()=>{
             this.setState({
-                showBanner:true
+                showBanner:true,
+                crossClicked:false
             })
         },1000)
     }
     showFailureBanner=()=>{
         setTimeout(()=>{
             this.setState({
-                showFailureBanner:true
+                showFailureBanner:true,
+                crossClicked:false
             })
         },1000)
     }
-    
+    crossClicked=()=>{
+        this.setState({
+            crossClicked:true
+        });
+    }
     render(){
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
-        const {showBanner,showFailureBanner}= this.state;
+        const {showBanner,showFailureBanner,crossClicked}= this.state;
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
             console.log("data from parent compo", dataToDisplay)
@@ -135,11 +142,11 @@ export default class AsideResult extends Component {
         return (
             patientComponent? 
             <div className="aside-results-box">
-            {showBanner?  <div className="success-banner">
-                <img src={success} alt="success" width="45" height="42"/><div className="banner-text-error">All studies have been downloaded successfully `${finalCount/finalCount}`</div> <div className="cross-button">X</div>
-            </div>: showFailureBanner ? 
+            {showBanner && !crossClicked?  <div className="success-banner">
+                <img src={success} alt="success" width="45" height="45"/><div className="banner-text-error">All studies have been downloaded successfully `${finalCount/finalCount}`</div> <div className="cross-button" onClick={this.crossClicked}>X</div>
+            </div>: showFailureBanner && !crossClicked ? 
             <div className="failure-banner">
-                <img src={failure} alt="success" width="45" height="42"/><div className="banner-text-error">Download was unable to complete. Please try again </div> <div className="cross-button">X</div>
+                <img src={failure} alt="success" width="45" height="45"/><div className="banner-text-error">Download was unable to complete. Please try again </div> <div className="cross-button" onClick={this.crossClicked}>X</div>
             </div>
             :null}
             {submitClicked && finalCount>0? 
@@ -189,9 +196,11 @@ export default class AsideResult extends Component {
             </div>
             :StudyComponent? 
             <div className="aside-results-box">
-               {showBanner?  <div className="success-banner">
-                <img src={success} alt="success" width="45" height="42"/><div className="banner-text-success">All studies have been downloaded successfully {finalCount}</div> <div className="cross-button">X</div>
-            </div>: showFailureBanner ? <div>failure banner</div>:null}
+               {showBanner && !crossClicked?  <div className="success-banner">
+                <img src={success} alt="success" width="45" height="45"/><div className="banner-text-success">All studies have been downloaded successfully {finalCount}<span>/{finalCount}</span></div> <div className="cross-button" onClick={this.crossClicked}>X</div>
+            </div>: showFailureBanner && !crossClicked ? <div className="failure-banner">
+                <img src={failure} alt="success" width="45" height="45"/><div className="banner-text-error">Download was unable to complete. Please try again </div> <div className="cross-button" onClick={this.crossClicked}>X</div>
+            </div>:null}
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
