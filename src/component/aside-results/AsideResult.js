@@ -19,27 +19,36 @@ export default class AsideResult extends Component {
             iconUp: 'chevron-up',
             showBanner:false,
             showFailureBanner:false,
-            crossClicked: false
+            crossClicked: false,
+            downloadText:"Download All"
         }
     }
     changeIcon=(id)=>{
         this.setState(state => ({ [id]: !state[id] }));
     }
     showDownloadBanner=()=>{
+        this.setState({
+            downloadText:"Downloading..."
+        })
         setTimeout(()=>{
             this.setState({
                 showBanner:true,
-                crossClicked:false
+                crossClicked:false,
+                downloadText: "Download All"
             })
-        },1000)
+        },5000)
     }
     showFailureBanner=()=>{
+        this.setState({
+            downloadText:"Downloading..."
+        })
         setTimeout(()=>{
             this.setState({
                 showFailureBanner:true,
-                crossClicked:false
+                crossClicked:false,
+                downloadText: "Download All"
             })
-        },1000)
+        },5000)
     }
     crossClicked=()=>{
         this.setState({
@@ -50,7 +59,7 @@ export default class AsideResult extends Component {
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
-        const {showBanner,showFailureBanner,crossClicked}= this.state;
+        const {showBanner,showFailureBanner,crossClicked,downloadText}= this.state;
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
             console.log("data from parent compo", dataToDisplay)
@@ -152,9 +161,9 @@ export default class AsideResult extends Component {
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
-            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>Download All</a></button>:
+            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>{downloadText}</a></button>:
             // eslint-disable-next-line
-            finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">Download All</a></button>:null}
+            finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
             </h2> 
             <div className="place-holder-patient">
                 <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].lastName}</strong></span>
@@ -204,9 +213,9 @@ export default class AsideResult extends Component {
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
-            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>Download All</a></button>:
+            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>{downloadText}</a></button>:
             // eslint-disable-next-line
-            finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">Download All</a></button>:null}
+            finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
             </h2> 
                 <div className="place-holder-patient">
                     <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].name}</strong></span>
