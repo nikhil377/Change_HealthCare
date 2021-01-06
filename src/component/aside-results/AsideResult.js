@@ -4,6 +4,7 @@ import { Component } from 'react';
 import SampleData from './SampleData';
 import SampleDataStudy from './SampleDataStudy';
 import { MDBIcon} from "mdbreact";
+import sample from './sample.pdf'
 
 const icon = [
     { id: 0, name: 'chevron-up' },
@@ -13,17 +14,34 @@ export default class AsideResult extends Component {
     constructor(props){
         super(props);
         this.state={
-            iconUp: 'chevron-up'
+            iconUp: 'chevron-up',
+            showBanner:false,
+            showFailureBanner:false
         }
     }
     changeIcon=(id)=>{
         this.setState(state => ({ [id]: !state[id] }));
     }
-     
+    showDownloadBanner=()=>{
+        setTimeout(()=>{
+            this.setState({
+                showBanner:true
+            })
+        },5000)
+    }
+    showFailureBanner=()=>{
+        setTimeout(()=>{
+            this.setState({
+                showFailureBanner:true
+            })
+        },5000)
+    }
+    
     render(){
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
+        const {showBanner,showFailureBanner}= this.state;
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
             console.log("data from parent compo", dataToDisplay)
@@ -115,10 +133,13 @@ export default class AsideResult extends Component {
         return (
             patientComponent? 
             <div className="aside-results-box">
+            {showBanner? <div>download banner</div>: showFailureBanner ? <div>failure banner</div>:null}
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
-                <button className="download-all-button">Download All</button>
+            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>Download All</a></button>:
+            // eslint-disable-next-line
+            finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">Download All</a></button>:null}
             </h2> 
             <div className="place-holder-patient">
                 <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].lastName}</strong></span>
@@ -158,12 +179,16 @@ export default class AsideResult extends Component {
                 }
             
             </div>
-            :StudyComponent? <div className="aside-results-box">
-             {submitClicked && finalCount>0? 
-                <>
-                <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
-                    <button className="download-all-button">Download All</button>
-                </h2> 
+            :StudyComponent? 
+            <div className="aside-results-box">
+             {showBanner? <div>download banner</div>: showFailureBanner ? <div>failure banner</div>:null}
+            {submitClicked && finalCount>0? 
+            <>
+            <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
+            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>Download All</a></button>:
+            // eslint-disable-next-line
+            finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">Download All</a></button>:null}
+            </h2> 
                 <div className="place-holder-patient">
                     <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].name}</strong></span>
                     <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
