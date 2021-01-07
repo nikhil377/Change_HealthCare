@@ -17,7 +17,7 @@ export default [{
     "performedEndDate": "2021-01-07",
     "performedStartDate": "2021-01-07",
     "sopInstanceUID": "3",
-    "studyUID": "3",
+    "studyUID": "2",
     "accessionNumber": "3",
     "modalities": "sample2",
     "name": "Aditya",

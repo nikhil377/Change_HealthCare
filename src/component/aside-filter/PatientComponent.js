@@ -72,7 +72,7 @@ export default class PatientComponent extends Component {
     }
     render(){
          const {value,filteredData,submitClicked}=this.state;
-         console.log("updated state in patient ", filteredData);
+        //  console.log("updated state in patient ", filteredData);
         return (
         <div className="patient-container">  
             <form onSubmit={this.submitData()} className="patient-form">

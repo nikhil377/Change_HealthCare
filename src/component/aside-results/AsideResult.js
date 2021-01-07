@@ -1,7 +1,7 @@
 import './AsideResult.css'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Component } from 'react';
-import SampleData from './SampleData';
+import SampleDataPatient from './SampleDataPatient';
 import SampleDataStudy from './SampleDataStudy';
 import { MDBIcon} from "mdbreact";
 import sample from './sample.pdf'
@@ -20,11 +20,143 @@ export default class AsideResult extends Component {
             showBanner:false,
             showFailureBanner:false,
             crossClicked: false,
-            downloadText:"Download All"
+            downloadText:"Download All",
+            dataSorted:false,
+            sortedValues:[],
+            direction: 'asc'
         }
     }
-    changeIcon=(id)=>{
+    changeIcon=(id,direction,dataToSort)=>{
+        console.log("id",id);
         this.setState(state => ({ [id]: !state[id] }));
+        console.log("data to sort!!!",dataToSort);
+        if(id==="name" && direction==="asc"){
+           let dataSortedValues= dataToSort.sort((a, b) => a.name.localeCompare(b.name));
+            console.log("data sorted!!",dataToSort)
+            this.setState({
+                dataSorted:true,
+                sortedValues:dataSortedValues,
+                direction:'dsc'
+            })
+        }
+        if(id==="name" && direction==="dsc"){
+            let dataSortedValues= dataToSort.sort((a, b) => b.name.localeCompare(a.name));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'asc'
+             })
+         }
+         if(id==="issuer" && direction==="asc"){
+            let dataSortedValues= dataToSort.sort((a, b) => a.issuer.localeCompare(b.issuer));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'dsc'
+             })
+         }
+         if(id==="issuer" && direction==="dsc"){
+             let dataSortedValues= dataToSort.sort((a, b) => b.issuer.localeCompare(a.issuer));
+              console.log("data sorted!!",dataToSort)
+              this.setState({
+                  dataSorted:true,
+                  sortedValues:dataSortedValues,
+                  direction:'asc'
+              })
+          }
+          if(id==="status" && direction==="asc"){
+            let dataSortedValues= dataToSort.sort((a, b) => a.status.localeCompare(b.status));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'dsc'
+             })
+         }
+         if(id==="status" && direction==="dsc"){
+             let dataSortedValues= dataToSort.sort((a, b) => b.status.localeCompare(a.status));
+              console.log("data sorted!!",dataToSort)
+              this.setState({
+                  dataSorted:true,
+                  sortedValues:dataSortedValues,
+                  direction:'asc'
+              })
+          }
+          if(id==="dob" && direction==="asc"){
+            let dataSortedValues= dataToSort.sort((a, b) => a.dob.localeCompare(b.dob));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'dsc'
+             })
+         }
+         if(id==="dob" && direction==="dsc"){
+             let dataSortedValues= dataToSort.sort((a, b) => b.dob.localeCompare(a.dob));
+              console.log("data sorted!!",dataToSort)
+              this.setState({
+                  dataSorted:true,
+                  sortedValues:dataSortedValues,
+                  direction:'asc'
+              })
+          }
+          if(id==="patientId" && direction==="asc"){
+            let dataSortedValues= dataToSort.sort((a, b) => a.patientId.localeCompare(b.patientId));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'dsc'
+             })
+         }
+         if(id==="patientId" && direction==="dsc"){
+             let dataSortedValues= dataToSort.sort((a, b) => b.patientId.localeCompare(a.patientId));
+              console.log("data sorted!!",dataToSort)
+              this.setState({
+                  dataSorted:true,
+                  sortedValues:dataSortedValues,
+                  direction:'asc'
+              })
+          }
+          if(id==="accessionNumber" && direction==="asc"){
+            let dataSortedValues= dataToSort.sort((a, b) => a.accessionNumber.localeCompare(b.accessionNumber));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'dsc'
+             })
+         }
+         if(id==="accessionNumber" && direction==="dsc"){
+             let dataSortedValues= dataToSort.sort((a, b) => b.accessionNumber.localeCompare(a.accessionNumber));
+              console.log("data sorted!!",dataToSort)
+              this.setState({
+                  dataSorted:true,
+                  sortedValues:dataSortedValues,
+                  direction:'asc'
+              })
+          }
+          if(id==="performedDate" && direction==="asc"){
+            let dataSortedValues= dataToSort.sort((a, b) => a.performedDate.localeCompare(b.performedDate));
+             console.log("data sorted!!",dataToSort)
+             this.setState({
+                 dataSorted:true,
+                 sortedValues:dataSortedValues,
+                 direction:'dsc'
+             })
+         }
+         if(id==="performedDate" && direction==="dsc"){
+             let dataSortedValues= dataToSort.sort((a, b) => b.performedDate.localeCompare(a.performedDate));
+              console.log("data sorted!!",dataToSort)
+              this.setState({
+                  dataSorted:true,
+                  sortedValues:dataSortedValues,
+                  direction:'asc'
+              })
+          }
+          
     }
     showDownloadBanner=()=>{
         this.setState({
@@ -59,10 +191,11 @@ export default class AsideResult extends Component {
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
-        const {showBanner,showFailureBanner,crossClicked,downloadText}= this.state;
+        const {showBanner,showFailureBanner,crossClicked,sortedValues,dataSorted,direction}= this.state;
+        console.log("sorted state values",sortedValues,dataSorted)
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
-            console.log("data from parent compo", dataToDisplay)
+ //           console.log("data from parent compo", dataToDisplay)
             let switchCase= dataToDisplay[0];
             let firstName = switchCase.firstName.length>0;
             let lastName = switchCase.lastName.length>0;
@@ -70,38 +203,38 @@ export default class AsideResult extends Component {
             let internalId = switchCase.internalId.length>0;
             
             if(firstName){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].firstName===switchCase.firstName){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].firstName===switchCase.firstName){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
-                console.log("filtered data-->", filteredDataToDisplay);
+               // console.log("filtered data-->", filteredDataToDisplay);
             }
             if(lastName){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].lastName===switchCase.lastName){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].lastName===switchCase.lastName){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
             }
             if(patientId){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].patientId===switchCase.patientId){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].patientId===switchCase.patientId){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
             }
             if(internalId){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].internalId===switchCase.internalId){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].internalId===switchCase.internalId){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
             }
 
         }
         if(submitClicked && StudyComponent){
-            console.log("data from parent compo", dataToDisplay)
+         //   console.log("data from parent compo", dataToDisplay)
             let switchCase= dataToDisplay[0];
             let accessionNumber = switchCase.accessionNumber.length>0;
             let performedEndDate = switchCase.performedEndDate.length>0;
@@ -114,7 +247,7 @@ export default class AsideResult extends Component {
                         filteredDataToDisplay.push(SampleDataStudy[i]);
                     }
                 }
-                console.log("filtered data-->", filteredDataToDisplay);
+              //  console.log("filtered data-->", filteredDataToDisplay);
             }
             if(performedEndDate){
                 for(let i=0;i<SampleDataStudy.length;i++){
@@ -147,7 +280,7 @@ export default class AsideResult extends Component {
 
         }
         const finalCount= filteredDataToDisplay.length;
-        console.log("finalcount",finalCount);
+       // console.log("finalcount",finalCount);
         return (
             patientComponent? 
             <div className="aside-results-box">
@@ -174,31 +307,46 @@ export default class AsideResult extends Component {
                 </h2>}
                 <Container className="filter-container">
                 <Row>
-                    <Col id={icon.id+"name"} onClick={() => this.changeIcon(icon.id+"name")} sm={2}>Name  <MDBIcon icon={this.state[icon.id+"name"] ? "chevron-up" : "chevron-down"}/> </Col>
+                    <Col id={"name"} onClick={() => this.changeIcon("name", direction,filteredDataToDisplay)} sm={2}>Name  <MDBIcon icon={this.state["name"] ? "chevron-up" : "chevron-down"}/> </Col>
                     <Col sm={2}>Patient ID</Col>
-                    <Col id={icon.id+"issuer"} onClick={() => this.changeIcon(icon.id+"issuer")} sm={2}>Issuer  <MDBIcon icon={this.state[icon.id+"issuer"] ? "chevron-up" : "chevron-down"}/></Col>
-                    <Col id={icon.id+"status"} onClick={() => this.changeIcon(icon.id+"status")} sm={2}>Status <MDBIcon icon={this.state[icon.id+"status"] ? "chevron-up" : "chevron-down"}/></Col>
-                    <Col id={icon.id+"dob"} onClick={() => this.changeIcon(icon.id+"dob")} sm={2}>Date of Birth <MDBIcon icon={this.state[icon.id+"dob"] ? "chevron-up" : "chevron-down"} /></Col>
+                    <Col id={"issuer"} onClick={() => this.changeIcon("issuer", direction,filteredDataToDisplay)} sm={2}>Issuer  <MDBIcon icon={this.state["issuer"] ? "chevron-up" : "chevron-down"}/></Col>
+                    <Col id={"status"} onClick={() => this.changeIcon("status", direction,filteredDataToDisplay)} sm={2}>Status <MDBIcon icon={this.state["status"] ? "chevron-up" : "chevron-down"}/></Col>
+                    <Col id={"dob"} onClick={() => this.changeIcon("dob", direction,filteredDataToDisplay)} sm={2}>Date of Birth <MDBIcon icon={this.state["dob"] ? "chevron-up" : "chevron-down"} /></Col>
                     <Col sm={2}>Gender</Col>
                 </Row>            
                 </Container>
-                {submitClicked && finalCount>0?
+                {submitClicked && finalCount>0 && dataSorted===false?
                 filteredDataToDisplay.map((value,index)=>{
-                    console.log("valueeee-->",value);
+                  //  console.log("valueeee-->",value);
                     return(
                     <Container className="filter-container filtered-display-data">
                     <Row>
-                        <Col sm={2} key={Math.random()}>{value.lastName}</Col>
+                        <Col sm={2} key={Math.random()}>{value.firstName+" "+value.lastName}</Col>
                         <Col sm={2} key={Math.random()}>{value.patientId}</Col>
-                        <Col sm={2} key={Math.random()}>{value.Issuer}</Col>
+                        <Col sm={2} key={Math.random()}>{value.issuer}</Col>
                         <Col sm={2} key={Math.random()}>{value.status}</Col>
-                        <Col sm={2} key={Math.random()}>{value.dateOfBirth}</Col>
+                        <Col sm={2} key={Math.random()}>{value.dob}</Col>
                         <Col sm={2} key={Math.random()}>{value.gender}</Col>
                     </Row>
                     </Container>
                     )
                 })
-                   :
+                   :submitClicked && finalCount>0 && dataSorted?
+                   sortedValues.map((value,index)=>{
+                      //  console.log("valueeee-->",value);
+                        return(
+                        <Container className="filter-container filtered-display-data">
+                        <Row>
+                            <Col sm={2} key={Math.random()}>{value.firstName+" "+value.lastName}</Col>
+                            <Col sm={2} key={Math.random()}>{value.patientId}</Col>
+                            <Col sm={2} key={Math.random()}>{value.issuer}</Col>
+                            <Col sm={2} key={Math.random()}>{value.status}</Col>
+                            <Col sm={2} key={Math.random()}>{value.dob}</Col>
+                            <Col sm={2} key={Math.random()}>{value.gender}</Col>
+                        </Row>
+                        </Container>
+                        )
+                    }):
                 <span className="no-records-text">No records to be displayed at this time</span>
                 }
             
@@ -226,18 +374,34 @@ export default class AsideResult extends Component {
                 </h2>}
             <Container className="filter-container">
             <Row>
-                    <Col id={icon.id+"name"} onClick={() => this.changeIcon(icon.id+"name")} sm={2}>Name <MDBIcon icon={this.state[icon.id+"name"] ? "chevron-up" : "chevron-down"}/> </Col>
-                    <Col id={icon.id+"patientId"} onClick={() => this.changeIcon(icon.id+"patientId")} sm={2}>Patient ID <MDBIcon icon={this.state[icon.id+"patientId"] ? "chevron-up" : "chevron-down"}/></Col>
-                    <Col id={icon.id+"accessionNo"} onClick={() => this.changeIcon(icon.id+"accessionNo")} sm={2}>Accession No.<MDBIcon icon={this.state[icon.id+"accessionNo"] ? "chevron-up" : "chevron-down"}/></Col>
-                    <Col id={icon.id+"performedDate"} onClick={() => this.changeIcon(icon.id+"performedDate")} sm={2}>Performed Date <MDBIcon icon={this.state[icon.id+"performedDate"] ? "chevron-up" : "chevron-down"} /></Col>
-                <Col sm={1}>Modalities</Col>
-                <Col sm={2} className="col-no-objects">No. Objects</Col>
-                <Col sm={1} className="col-no-series">No. Series</Col>
+                    <Col id={"name"} onClick={() => this.changeIcon("name", direction,filteredDataToDisplay)} sm={2}>Name <MDBIcon icon={this.state["name"] ? "chevron-up" : "chevron-down"}/> </Col>
+                    <Col id={"patientId"} onClick={() => this.changeIcon("patientId", direction,filteredDataToDisplay)} sm={2}>Patient ID <MDBIcon icon={this.state["patientId"] ? "chevron-up" : "chevron-down"}/></Col>
+                    <Col id={"accessionNumber"} onClick={() => this.changeIcon("accessionNumber", direction,filteredDataToDisplay)} sm={2}>Accession No.<MDBIcon icon={this.state["accessionNumber"] ? "chevron-up" : "chevron-down"}/></Col>
+                    <Col id={"performedDate"} onClick={() => this.changeIcon("performedDate", direction,filteredDataToDisplay)} sm={2}>Performed Date <MDBIcon icon={this.state["performedDate"] ? "chevron-up" : "chevron-down"} /></Col>
+                    <Col sm={1}>Modalities</Col>
+                    <Col sm={2} className="col-no-objects">No. Objects</Col>
+                    <Col sm={1} className="col-no-series">No. Series</Col>
             </Row>
             </Container>
-            {submitClicked && finalCount>0?
+            {submitClicked && finalCount>0 && dataSorted==false?
                 filteredDataToDisplay.map((value,index)=>{
-                    console.log("valueeee-->",value);
+                 //   console.log("valueeee-->",value);
+                    return(
+                    <Container className="filter-container filtered-display-data">
+                    <Row>
+                        <Col sm={2} key={Math.random()}>{value.name}</Col>
+                        <Col sm={2} key={Math.random()}>{value.patientId}</Col>
+                        <Col sm={2} key={Math.random()}>{value.accessionNumber}</Col>
+                        <Col sm={2} key={Math.random()}>{value.performedDate}</Col>
+                        <Col sm={1} key={Math.random()}>{value.modalities}</Col>
+                        <Col sm={2} key={Math.random()} className="text-center">{value.noOfObjects}</Col>
+                        <Col sm={1} key={Math.random()}>{value.noSeries}</Col>
+                    </Row>
+                    </Container>
+                    )
+                }) :submitClicked && finalCount>0 && dataSorted?
+                sortedValues.map((value,index)=>{
+                 //   console.log("valueeee-->",value);
                     return(
                     <Container className="filter-container filtered-display-data">
                     <Row>
