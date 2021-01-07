@@ -21,7 +21,6 @@ class App extends Component {
     });
   }
   updatePatientData(value) {
-    console.log("PatientData", value)
     return () => {
       this.setState({
         patientDataToDisplay: value
@@ -31,7 +30,6 @@ class App extends Component {
     }
   }
   updateStudyData(value){
-    console.log("studyDataToDisplay", value)
     return () => {
       this.setState({
         studyDataToDisplay: value

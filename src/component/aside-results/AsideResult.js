@@ -8,10 +8,6 @@ import sample from './sample.pdf'
 import success from './success.png'
 import failure from './error.png';
 
-const icon = [
-    { id: 0, name: 'chevron-up' },
-    { id: 1, name: 'chevron-down' }
-  ];
 export default class AsideResult extends Component {
     constructor(props){
         super(props);
@@ -191,7 +187,7 @@ export default class AsideResult extends Component {
         const patientComponent= this.props.activeComponent==="patient";
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
-        const {showBanner,showFailureBanner,crossClicked,sortedValues,dataSorted,direction}= this.state;
+        const {showBanner,showFailureBanner,crossClicked,sortedValues,downloadText,dataSorted,direction}= this.state;
         console.log("sorted state values",sortedValues,dataSorted)
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
@@ -285,7 +281,7 @@ export default class AsideResult extends Component {
             patientComponent? 
             <div className="aside-results-box">
             {showBanner && !crossClicked?  <div className="success-banner">
-                <img src={success} alt="success" width="45" height="45"/><div className="banner-text-error">All studies have been downloaded successfully `${finalCount/finalCount}`</div> <div className="cross-button" onClick={this.crossClicked}>X</div>
+                <img src={success} alt="success" width="45" height="45"/><div className="banner-text-error">All studies have been downloaded successfully  {finalCount}<span>/{finalCount}</span></div> <div className="cross-button" onClick={this.crossClicked}>X</div>
             </div>: showFailureBanner && !crossClicked ? 
             <div className="failure-banner">
                 <img src={failure} alt="success" width="45" height="45"/><div className="banner-text-error">Download was unable to complete. Please try again </div> <div className="cross-button" onClick={this.crossClicked}>X</div>
@@ -383,7 +379,7 @@ export default class AsideResult extends Component {
                     <Col sm={1} className="col-no-series">No. Series</Col>
             </Row>
             </Container>
-            {submitClicked && finalCount>0 && dataSorted==false?
+            {submitClicked && finalCount>0 && dataSorted===false?
                 filteredDataToDisplay.map((value,index)=>{
                  //   console.log("valueeee-->",value);
                     return(
