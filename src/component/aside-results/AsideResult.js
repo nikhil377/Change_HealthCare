@@ -1,7 +1,7 @@
 import './AsideResult.css'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Component } from 'react';
-import SampleData from './SampleData';
+import SampleDataPatient from './SampleDataPatient';
 import SampleDataStudy from './SampleDataStudy';
 import { MDBIcon} from "mdbreact";
 import sample from './sample.pdf'
@@ -23,6 +23,7 @@ export default class AsideResult extends Component {
         }
     }
     changeIcon=(id)=>{
+        console.log("id",id);
         this.setState(state => ({ [id]: !state[id] }));
     }
     showDownloadBanner=()=>{
@@ -61,31 +62,31 @@ export default class AsideResult extends Component {
             let internalId = switchCase.internalId.length>0;
             
             if(firstName){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].firstName===switchCase.firstName){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].firstName===switchCase.firstName){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
                 console.log("filtered data-->", filteredDataToDisplay);
             }
             if(lastName){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].lastName===switchCase.lastName){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].lastName===switchCase.lastName){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
             }
             if(patientId){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].patientId===switchCase.patientId){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].patientId===switchCase.patientId){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
             }
             if(internalId){
-                for(let i=0;i<SampleData.length;i++){
-                    if(SampleData[i].internalId===switchCase.internalId){
-                        filteredDataToDisplay.push(SampleData[i]);
+                for(let i=0;i<SampleDataPatient.length;i++){
+                    if(SampleDataPatient[i].internalId===switchCase.internalId){
+                        filteredDataToDisplay.push(SampleDataPatient[i]);
                     }
                 }
             }
@@ -221,9 +222,9 @@ export default class AsideResult extends Component {
                     <Col id={icon.id+"patientId"} onClick={() => this.changeIcon(icon.id+"patientId")} sm={2}>Patient ID <MDBIcon icon={this.state[icon.id+"patientId"] ? "chevron-up" : "chevron-down"}/></Col>
                     <Col id={icon.id+"accessionNo"} onClick={() => this.changeIcon(icon.id+"accessionNo")} sm={2}>Accession No.<MDBIcon icon={this.state[icon.id+"accessionNo"] ? "chevron-up" : "chevron-down"}/></Col>
                     <Col id={icon.id+"performedDate"} onClick={() => this.changeIcon(icon.id+"performedDate")} sm={2}>Performed Date <MDBIcon icon={this.state[icon.id+"performedDate"] ? "chevron-up" : "chevron-down"} /></Col>
-                <Col sm={1}>Modalities</Col>
-                <Col sm={2} className="col-no-objects">No. Objects</Col>
-                <Col sm={1} className="col-no-series">No. Series</Col>
+                    <Col sm={1}>Modalities</Col>
+                    <Col sm={2} className="col-no-objects">No. Objects</Col>
+                    <Col sm={1} className="col-no-series">No. Series</Col>
             </Row>
             </Container>
             {submitClicked && finalCount>0?
