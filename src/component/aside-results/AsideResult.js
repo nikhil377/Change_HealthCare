@@ -304,7 +304,7 @@ export default class AsideResult extends Component {
             finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
             </h2> 
             <div className="place-holder-patient">
-                <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].lastName}</strong></span>
+                <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].name}</strong></span>
                 <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
                 <span className="patient-id">Date of Birth:<strong>{filteredDataToDisplay[0].dob}</strong></span>
                 <span className="patient-id">Gender:<strong>{filteredDataToDisplay[0].gender}</strong></span>
