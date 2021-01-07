@@ -7,7 +7,7 @@ import { MDBIcon} from "mdbreact";
 import sample from './sample.pdf'
 import success from './success.png'
 import failure from './error.png';
-
+var Filesaver = require('file-saver'); // to be removed if not needed
 export default class AsideResult extends Component {
     constructor(props){
         super(props);
@@ -157,6 +157,9 @@ export default class AsideResult extends Component {
     showDownloadBanner=()=>{
         this.setState({
             downloadText:"Downloading..."
+        },()=>{ // to be removed if not needed
+            var blob = new Blob(["hello world!"], {type:"text/plain;charset=utf-8"});
+            Filesaver.saveAs(blob,"bello.txt")
         })
         setTimeout(()=>{
             this.setState({
