@@ -19,7 +19,7 @@ export default class AsideResult extends Component {
             downloadText:"Download All",
             dataSorted:false,
             sortedValues:[],
-            direction: 'asc'
+            direction: 'asc',
         }
     }
     changeIcon=(id,direction,dataToSort)=>{
@@ -163,6 +163,8 @@ export default class AsideResult extends Component {
                 showBanner:true,
                 crossClicked:false,
                 downloadText: "Download All"
+            },()=>{
+                this.props.data("show banner")
             })
         },5000)
     }
@@ -175,12 +177,16 @@ export default class AsideResult extends Component {
                 showFailureBanner:true,
                 crossClicked:false,
                 downloadText: "Download All"
+            },()=>{
+                this.props.data("show banner")
             })
         },5000)
     }
     crossClicked=()=>{
         this.setState({
             crossClicked:true
+        },()=>{
+            this.props.data("hide banner")
         });
     }
     render(){
@@ -290,7 +296,7 @@ export default class AsideResult extends Component {
             {submitClicked && finalCount>0? 
             <>
             <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
-            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>{downloadText}</a></button>:
+            {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>{downloadText}</a> <input type="file" id="file" ref="fileUploader" style={{display: "none"}}/></button>:
             // eslint-disable-next-line
             finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
             </h2> 

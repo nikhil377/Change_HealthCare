@@ -1,8 +1,8 @@
 import home from '../header/home.png'
 import './header.css'
-export default function Header() {
+export default function Header(props) {
     return (
-        <div className="header-box">
+        <div className={props.className? 'show-banner-header': 'header-box'}>
             <img src={home} alt="Home button" width="30" height="40"/>
             <div>Select a tenant:</div>
             <select className="company-dropdown">

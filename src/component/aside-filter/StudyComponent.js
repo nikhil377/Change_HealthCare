@@ -25,7 +25,7 @@ class StudyComponent extends Component {
     })
 }
     submitData=()=>{
-        this.props.data(this.state.filteredData)
+        // this.props.data(this.state.filteredData)
     }
     enableFields=(e)=>{
         this.setState({
@@ -131,7 +131,7 @@ class StudyComponent extends Component {
                  <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
                  <button className="clear-all-button">CLEAR ALL</button>
                  </form>
-                 <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked}/>
+                 <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked} data={this.props.data}/>
             </div>
         );
     }

@@ -14,3 +14,14 @@
     margin-top:5px;
     margin-left: 5px;
 }
+.show-banner-header{
+    padding-top: 56px;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color:#D3D3D3;
+}
+.show-banner-header > div{
+    margin-top:10px;
+    margin-left: 5px;
+    font-weight: bold;
+}

@@ -10,38 +10,37 @@ class App extends Component {
     this.state = {
       active: "patient",
       patientDataToDisplay: "",
-      studyDataToDisplay:""
+      studyDataToDisplay:"",
+      showBanner: false,
     }
-    this.updateStudyData=this.updateStudyData.bind(this);
     this.updatePatientData=this.updatePatientData.bind(this);
   }
   changeComponentView = (e) => {
     this.setState({
-      active: e.target.value
+      active: e.target.value,
+      showBanner:false
     });
   }
   updatePatientData(value) {
-    return () => {
+    console.log("show values",value)
+    if(value==="show banner"){
       this.setState({
-        patientDataToDisplay: value
-      },()=>{
-        console.log("parent data",this.state.patientDataToDisplay);
+        showBanner:true
       });
     }
-  }
-  updateStudyData(value){
-    return () => {
-      this.setState({
-        studyDataToDisplay: value
-      });
+    if(value==="hide banner"){
+        this.setState({
+          showBanner:false
+        });
     }
   }
   render() {
-    const { active,patientDataToDisplay } = this.state;
-    console.log("updated state",patientDataToDisplay)
+    const { active,showBanner } = this.state;
+    console.log("show banner--///.",showBanner)
+    const headerClass= showBanner? "show-banner-header":""
     return (
       <div className="App">
-        <Header />
+        <Header className={headerClass} />
         <div className="aside-boxes">
           <div className="aside-filter-box">
             <div className="search-text">Search</div>
@@ -50,7 +49,7 @@ class App extends Component {
             <p className="select-category-text">Select one of the category below:</p>
             {active === "patient" ? 
               <PatientComponent  activeComponent={active} data={this.updatePatientData} />
-              : <StudyComponent activeComponent={active} data={this.updateStudyData} />
+              : <StudyComponent activeComponent={active} data={this.updatePatientData} />
             }
           </div>
         </div>

@@ -28,7 +28,7 @@ export default class PatientComponent extends Component {
         });
     }
     submitData=()=>{
-        this.props.data(this.state.filteredData)
+       // this.props.data(this.state.filteredData)
     }
     getInputFilteredData(value){
         if(value.includes("First Name")){
@@ -72,7 +72,6 @@ export default class PatientComponent extends Component {
     }
     render(){
          const {value,filteredData,submitClicked}=this.state;
-        //  console.log("updated state in patient ", filteredData);
         return (
         <div className="patient-container">  
             <form onSubmit={this.submitData()} className="patient-form">
@@ -118,7 +117,7 @@ export default class PatientComponent extends Component {
                 <button className="clear-all-button">CLEAR ALL</button>
                 </div>
                 </form>    
-                <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked}/>
+                <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked} data={this.props.data}/>
         </div>
       
         )

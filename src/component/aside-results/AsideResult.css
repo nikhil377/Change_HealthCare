@@ -77,6 +77,8 @@ h2{
     place-content: center;
     background-color: #C70039;
     height: 56px;
+    margin-top: -6%;
+    margin-left: -43%;
 }
 .banner-text-error{
     color: white;
@@ -97,9 +99,15 @@ h2{
     place-content: center;
     background-color: #308310;
     height: 56px;
+    margin-top: -6%;
+    margin-left: -43%;
 }
 .banner-text-success{
     color: white;
     padding-top: 12px;
     padding-left: 10px;
 }
+
+/* .aside-boxes:has(.banner-text-success) ~ .header-box{
+   padding-top: 56px;
+} */
