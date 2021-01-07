@@ -8,7 +8,8 @@ export default [{
     "lastName": "Rohn",
     "patientId": "14",
     "status": "On track",
-    "dob":"02/28/1976"
+    "dob":"02/28/1976",
+    "name":"Rohn Rohn"
   }, {
     "issuer": "Xyz",
     "dateOfBirth": "12 Nov, 1998",
@@ -40,7 +41,8 @@ export default [{
     "lastName": "rohan",
     "patientId": "11",
     "status": "On track",
-    "dob":"02/28/1976"
+    "dob":"02/28/1976",
+    "name":"ABC Rohan"
   }, {
     "issuer": "XYZ",
     "dateOfBirth": "12 Nov, 1999",
@@ -50,15 +52,17 @@ export default [{
     "lastName": "Sid",
     "patientId": "14",
     "status": "Completed",
-    "dob":"02/28/1976"
+    "dob":"02/28/1976",
+    "name":"Sample Sid"
   },{
     "issuer": "A",
     "dateOfBirth": "12 Nov, 1999",
-    "firstName": "Sample",
+    "firstName": "BU",
     "gender": "Male",
     "internalId": "14",
     "lastName": "Nik",
     "patientId": "14",
     "status": "Completed",
-    "dob":"02/28/1976"
+    "dob":"02/28/1976",
+    "name":"BU Nik"
   }]
