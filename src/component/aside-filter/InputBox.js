@@ -23,7 +23,10 @@ export default class InputBox extends Component {
                 <br/>
                 {this.props.type==="date"?  
                 
-                <input type="date"  id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>
+                <input id={this.props.name} name={this.props.name}  type="text"  className="date-input"
+                onFocus={(e) => (e.currentTarget.type = "date")}
+                onBlur={(e) => (e.currentTarget.type = "text")}
+                placeholder="MM/DD/YYYY" disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>
                 :
                 <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>}<br/>
             </div>
@@ -32,3 +35,4 @@ export default class InputBox extends Component {
     }
    
 }
+ 
