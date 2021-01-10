@@ -23,9 +23,7 @@ export default class AsideResult extends Component {
         }
     }
     changeIcon=(id,direction,dataToSort)=>{
-        console.log("id",id);
         this.setState(state => ({ [id]: !state[id] }));
-        console.log("data to sort!!!",dataToSort);
         if(id==="name" && direction==="asc"){
            let dataSortedValues= dataToSort.sort((a, b) => a.name.localeCompare(b.name));
             console.log("data sorted!!",dataToSort)
@@ -200,7 +198,7 @@ export default class AsideResult extends Component {
         console.log("sorted state values",sortedValues,dataSorted)
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
- //           console.log("data from parent compo", dataToDisplay)
+        //    console.log("data from parent compo", this.props)
             let switchCase= dataToDisplay[0];
             let firstName = switchCase.firstName.length>0;
             let lastName = switchCase.lastName.length>0;
@@ -285,7 +283,8 @@ export default class AsideResult extends Component {
 
         }
         const finalCount= filteredDataToDisplay.length;
-       // console.log("finalcount",finalCount);
+        const lastNamePresent= this.props.dataToDisplay[0].lastName
+        // console.log("filtred data",filteredDataToDisplay);
         return (
             patientComponent? 
             <div className="aside-results-box">
@@ -303,12 +302,13 @@ export default class AsideResult extends Component {
             // eslint-disable-next-line
             finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
             </h2> 
+            {lastNamePresent?
             <div className="place-holder-patient">
                 <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].name}</strong></span>
                 <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
                 <span className="patient-id">Date of Birth:<strong>{filteredDataToDisplay[0].dob}</strong></span>
                 <span className="patient-id">Gender:<strong>{filteredDataToDisplay[0].gender}</strong></span>
-            </div></>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
+            </div>:null}</>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
                 </h2>}
                 <Container className="filter-container">
                 <Row>
@@ -370,12 +370,13 @@ export default class AsideResult extends Component {
             // eslint-disable-next-line
             finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
             </h2> 
+            {lastNamePresent?
                 <div className="place-holder-patient">
                     <span className="patient-name">Patient Name:<strong>{filteredDataToDisplay[0].name}</strong></span>
                     <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
                     <span className="patient-id">Date of Birth:<strong>{filteredDataToDisplay[0].dob}</strong></span>
                     <span className="patient-id">Gender:<strong>{filteredDataToDisplay[0].gender}</strong></span>
-                </div></>: <h2>Study Search Results <span className="record-numbers">-0 records found.</span>
+                </div>:null}</>: <h2>Study Search Results <span className="record-numbers">-0 records found.</span>
                 </h2>}
             <Container className="filter-container">
             <Row>

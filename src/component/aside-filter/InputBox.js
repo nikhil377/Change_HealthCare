@@ -16,6 +16,11 @@ export default class InputBox extends Component {
     }
     render(){
         const {inputBoxValue}=this.state;
+        const {name}=this.props;
+        let required= true;
+        if(name==="First Name"){
+            required=false;
+        }
         return (
             <div className="input-box">
                 <label className="input-label" for={this.props.name}>{this.props.name}</label>
@@ -26,9 +31,9 @@ export default class InputBox extends Component {
                 <input id={this.props.name} name={this.props.name}  type="text"  className="date-input"
                 onFocus={(e) => (e.currentTarget.type = "date")}
                 onBlur={(e) => (e.currentTarget.type = "text")}
-                placeholder="MM/DD/YYYY" disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>
+                placeholder="MM/DD/YYYY" disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue} required={true}/>
                 :
-                <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue} required/>}<br/>
+                <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue} required={required}/>}<br/>
             </div>
            
         )

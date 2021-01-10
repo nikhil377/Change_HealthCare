@@ -27,10 +27,11 @@ export default class PatientComponent extends Component {
             value:e.target.value
         });
     }
-    submitData=()=>{
-       // this.props.data(this.state.filteredData)
-    }
+    // submitData=()=>{
+    //    // this.props.data(this.state.filteredData)
+    // }
     getInputFilteredData(value){
+        console.log("value in parent--->",value);
         if(value.includes("First Name")){
             value=value.split("First Name");
             const filteredData = this.state.filteredData.slice();
@@ -64,17 +65,25 @@ export default class PatientComponent extends Component {
         }
         }
     }
-    submitClicked=(e)=>{
+    // submitClicked=(e)=>{
+    //     e.preventDefault()
+    //     this.setState({
+    //         submitClicked:true
+    //     })
+    // }
+    submitData=(e)=>{
         e.preventDefault()
         this.setState({
             submitClicked:true
         })
+  
     }
     render(){
          const {value,filteredData,submitClicked}=this.state;
+         console.log("filtered data--->",filteredData);
         return (
         <div className="patient-container">  
-            <form onSubmit={this.submitData()} className="patient-form">
+            <form onSubmit={this.submitData} className="patient-form">
                 <div>
                 <input 
                         type="radio" 
@@ -113,8 +122,8 @@ export default class PatientComponent extends Component {
 
                 <label for="internal-id">Internal ID</label>
                 <InputBox name="Internal ID" isMandatory="true" disabled={value!=="Internal ID"}  data={this.getInputFilteredData.bind(this)}/>
-                <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
-                <button className="clear-all-button">CLEAR ALL</button>
+                <button type="submit" className="disabled-search-button">SEARCH</button>
+                <button className="clear-all-button" onClick={()=>window.location.reload()}>CLEAR ALL</button>
                 </div>
                 </form>    
                 <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked} data={this.props.data}/>

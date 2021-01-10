@@ -24,8 +24,11 @@ class StudyComponent extends Component {
         submitClicked:true
     })
 }
-    submitData=()=>{
-        // this.props.data(this.state.filteredData)
+    submitData=(e)=>{
+        e.preventDefault()
+        this.setState({
+            submitClicked:true
+        })
     }
     enableFields=(e)=>{
         this.setState({
@@ -79,7 +82,7 @@ class StudyComponent extends Component {
         const {value,filteredData,submitClicked}=this.state;
         return (
             <div className="patient-container">  
-            <form onSubmit={this.submitData()} className="patient-form">
+            <form onSubmit={this.submitData} className="patient-form">
                    <input 
                         type="radio" 
                         id="accession-number" 
@@ -114,7 +117,7 @@ class StudyComponent extends Component {
                     checked={value==="Diacom Object"} 
                     onChange={this.enableFields}/>
 
-                <label for="internal-id">DICOM Object</label>
+                <label for="dicom-object">DICOM Object</label>
                 <InputBox name="SOP Instance UID" isMandatory="true" disabled={value!=="Diacom Object"} data={this.getInputFilteredData.bind(this)}/>
                 <hr/>
                 <input 
@@ -128,8 +131,8 @@ class StudyComponent extends Component {
                  <label for="performed-date">Performed Date Range</label>
                  <InputBox type="date" name="Start Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)} />
                  <InputBox type="date" name="End Date" isMandatory="true" disabled={value!=="Performed Date Range"}  data={this.getInputFilteredData.bind(this)}/>
-                 <button type="submit" className="disabled-search-button" onClick={this.submitClicked}>SEARCH</button>
-                 <button className="clear-all-button">CLEAR ALL</button>
+                 <button type="submit" className="disabled-search-button">SEARCH</button>
+                 <button className="clear-all-button" onClick={()=>window.location.reload()}>CLEAR ALL</button>
                  </form>
                  <AsideResult activeComponent={this.props.activeComponent} dataToDisplay={filteredData} submitClicked={submitClicked} data={this.props.data}/>
             </div>
