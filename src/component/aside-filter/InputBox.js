@@ -28,7 +28,7 @@ export default class InputBox extends Component {
                 onBlur={(e) => (e.currentTarget.type = "text")}
                 placeholder="MM/DD/YYYY" disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>
                 :
-                <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue}/>}<br/>
+                <input type="text" id={this.props.name} name={this.props.name} disabled={this.props.disabled} value={inputBoxValue} onChange={this.getChangedValue} required/>}<br/>
             </div>
            
         )

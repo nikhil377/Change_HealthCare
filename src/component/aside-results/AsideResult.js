@@ -159,7 +159,7 @@ export default class AsideResult extends Component {
             downloadText:"Downloading..."
         },()=>{ // to be removed if not needed
             var blob = new Blob(["hello world!"], {type:"text/plain;charset=utf-8"});
-            Filesaver.saveAs(blob,"bello.txt")
+            Filesaver.saveAs(blob,"Sample-file.txt")
         })
         setTimeout(()=>{
             this.setState({
@@ -365,7 +365,7 @@ export default class AsideResult extends Component {
             </div>:null}
             {submitClicked && finalCount>0? 
             <>
-            <h2>Patient Search Results <span className="record-numbers">-  {finalCount} records found.</span>
+            <h2>Study Search Results <span className="record-numbers">-  {finalCount} records found.</span>
             {finalCount>1? <button className="download-all-button" onClick={this.showDownloadBanner}> <a href={sample}download>{downloadText}</a></button>:
             // eslint-disable-next-line
             finalCount===1? <button className="download-all-button" onClick={this.showFailureBanner}> <a href="#">{downloadText}</a></button>:null}
@@ -375,7 +375,7 @@ export default class AsideResult extends Component {
                     <span className="patient-id">Patient ID:<strong>{filteredDataToDisplay[0].patientId}</strong> </span>
                     <span className="patient-id">Date of Birth:<strong>{filteredDataToDisplay[0].dob}</strong></span>
                     <span className="patient-id">Gender:<strong>{filteredDataToDisplay[0].gender}</strong></span>
-                </div></>: <h2>Patient Search Results <span className="record-numbers">-0 records found.</span>
+                </div></>: <h2>Study Search Results <span className="record-numbers">-0 records found.</span>
                 </h2>}
             <Container className="filter-container">
             <Row>
