@@ -36,7 +36,7 @@ class App extends Component {
   }
   render() {
     const { active,showBanner } = this.state;
-    console.log("show banner--///.",showBanner)
+    // console.log("show banner--///.",showBanner)
     const headerClass= showBanner? "show-banner-header":""
     return (
       <div className="App">

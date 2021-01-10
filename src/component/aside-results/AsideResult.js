@@ -195,7 +195,7 @@ export default class AsideResult extends Component {
         const StudyComponent = this.props.activeComponent==="study";
         const{dataToDisplay,submitClicked}=this.props;
         const {showBanner,showFailureBanner,crossClicked,sortedValues,downloadText,dataSorted,direction}= this.state;
-        console.log("sorted state values",sortedValues,dataSorted)
+        //console.log("sorted state values",sortedValues,dataSorted)
         let filteredDataToDisplay=[];
         if(submitClicked && patientComponent){
         //    console.log("data from parent compo", this.props)

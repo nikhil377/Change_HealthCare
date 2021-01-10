@@ -31,7 +31,7 @@ export default class PatientComponent extends Component {
     //    // this.props.data(this.state.filteredData)
     // }
     getInputFilteredData(value){
-        console.log("value in parent--->",value);
+        // console.log("value in parent--->",value);
         if(value.includes("First Name")){
             value=value.split("First Name");
             const filteredData = this.state.filteredData.slice();
@@ -80,7 +80,7 @@ export default class PatientComponent extends Component {
     }
     render(){
          const {value,filteredData,submitClicked}=this.state;
-         console.log("filtered data--->",filteredData);
+        // console.log("filtered data--->",filteredData);
         return (
         <div className="patient-container">  
             <form onSubmit={this.submitData} className="patient-form">
