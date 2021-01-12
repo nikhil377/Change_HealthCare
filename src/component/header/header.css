@@ -2,6 +2,10 @@
     display: flex;
     flex-wrap: nowrap;
     background-color:#D3D3D3;
+    position: relative;
+    -webkit-box-shadow: 0 8px 6px -9px black;
+	   -moz-box-shadow: 0 8px 6px -9px black;
+	        box-shadow: 0 8px 6px -9px black;
 }
 .header-box > div{
     margin-top:10px;
