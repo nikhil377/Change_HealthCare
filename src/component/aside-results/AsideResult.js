@@ -152,12 +152,19 @@ export default class AsideResult extends Component {
         }
 
     }
+     str2bytes (str) {
+        var bytes = new Uint8Array(str.length);
+        for (var i=0; i<str.length; i++) {
+            bytes[i] = str.charCodeAt(i);
+        }
+        return bytes;
+    }
     showDownloadBanner = () => {
         this.setState({
             downloadText: "Downloading..."
         }, () => { // to be removed if not needed
-            var blob = new Blob(["hello world!"], { type: "text/plain;charset=utf-8" });
-            Filesaver.saveAs(blob, "Sample-file.txt")
+            var blob = new Blob([this.str2bytes(SampleDataStudy[0])], {type: "application/zip"});
+           Filesaver.saveAs(blob, "data.zip"); 
         })
         setTimeout(() => {
             this.setState({
